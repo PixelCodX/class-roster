@@ -789,6 +789,48 @@ body.innerHTML+=`
 });
 
 }
+function filterRoster(){
+
+  const search = document
+    .getElementById("rosterSearch")
+    .value
+    .toLowerCase()
+    .trim();
+
+  const body = document.getElementById("rosterBody");
+
+  body.innerHTML = "";
+
+  const filtered = roster.filter(student =>
+    student.full_name.toLowerCase().includes(search) ||
+    student.roll_no.toLowerCase().includes(search)
+  );
+
+  filtered.forEach((student,index)=>{
+
+    body.innerHTML += `
+      <tr>
+        <td>${index+1}</td>
+        <td>${escapeHTML(student.full_name)}</td>
+        <td>${escapeHTML(student.roll_no)}</td>
+      </tr>
+    `;
+
+  });
+
+  if(filtered.length === 0){
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="3" style="text-align:center">
+          No student found
+        </td>
+      </tr>
+    `;
+
+  }
+
+  }
 
 
 /* =========================
