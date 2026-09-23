@@ -451,13 +451,20 @@ async function loadAttendanceDashboard(){
 
     const total = roster.length;
 
-    const present = rows.filter(
-      r => r.status === "present"
-    ).length;
+    const presentStudents = new Set(
+  rows
+    .filter(r => r.status === "present")
+    .map(r => r.roster_student_id)
+);
 
-    const absent = rows.filter(
-      r => r.status === "absent"
-    ).length;
+const absentStudents = new Set(
+  rows
+    .filter(r => r.status === "absent")
+    .map(r => r.roster_student_id)
+);
+
+const present = presentStudents.size;
+const absent = absentStudents.size;
 
     const percentage = total
       ? ((present / total) * 100).toFixed(1)
