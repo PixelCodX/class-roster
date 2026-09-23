@@ -815,6 +815,134 @@ function filterStudentAttendance(){
   });
 
   }
+function viewStudentDetails(studentId){
+
+  const student = roster.find(
+    s => Number(s.id) === Number(studentId)
+  );
+
+  if(!student){
+    alert("Student not found.");
+    return;
+  }
+
+  const container =
+    document.getElementById("studentDetailsContent");
+
+  container.innerHTML = `
+    <h3>${escapeHTML(student.full_name)}</h3>
+    <p><b>Roll No:</b> ${escapeHTML(student.roll_no)}</p>
+    <p>Loading attendance...</p>
+  `;
+
+  document.querySelectorAll("main>section").forEach(section=>{
+    section.classList.add("hidden");
+  });
+
+  document
+    .getElementById("studentDetails")
+    .classList.remove("hidden");
+
+  request(
+    "/rest/v1/attendance?select=subject_id,attendance_date,status,roster_student_id&roster_student_id=eq." +
+    encodeURIComponent(studentId) +
+    "&order=attendance_date.desc"
+  )
+  .then(rows => {
+
+    if(!rows.length){
+
+      container.innerHTML = `
+        <h3>${escapeHTML(student.full_name)}</h3>
+        <p><b>Roll No:</b> ${escapeHTML(student.roll_no)}</p>
+        <p>No attendance records yet.</p>
+      `;
+
+      return;
+    }
+
+    const present =
+      rows.filter(r => r.status === "present").length;
+
+    const absent =
+      rows.filter(r => r.status === "absent").length;
+
+    const total = present + absent;
+
+    const percentage =
+      total ? ((present / total) * 100).toFixed(1) : "0.0";
+
+    let html = `
+      <h3>${escapeHTML(student.full_name)}</h3>
+
+      <p><b>Roll No:</b> ${escapeHTML(student.roll_no)}</p>
+
+      <div class="grid">
+
+        <div class="stat">
+          <h2>${total}</h2>
+          <p>Total Classes</p>
+        </div>
+
+        <div class="stat">
+          <h2>${present}</h2>
+          <p>Present</p>
+        </div>
+
+        <div class="stat">
+          <h2>${absent}</h2>
+          <p>Absent</p>
+        </div>
+
+        <div class="stat">
+          <h2>${percentage}%</h2>
+          <p>Attendance</p>
+        </div>
+
+      </div>
+
+      <h3>📅 Attendance History</h3>
+    `;
+
+    rows.forEach(row => {
+
+      const subject = subjects.find(
+        s => s.id === row.subject_id
+      );
+
+      html += `
+        <div class="attendance">
+          <div>
+            <b>${escapeHTML(
+              subject ? subject.name : "Unknown Subject"
+            )}</b><br>
+            <small>${escapeHTML(row.attendance_date)}</small>
+          </div>
+
+          <b>
+            ${escapeHTML(row.status)}
+          </b>
+        </div>
+      `;
+
+    });
+
+    container.innerHTML = html;
+
+  })
+  .catch(error => {
+
+    console.error(error);
+
+    container.innerHTML = `
+      <p class="message danger">
+        Unable to load student attendance.
+      </p>
+    `;
+
+  });
+
+  }
   /* =========================
    ROSTER
 ========================= */
