@@ -424,6 +424,7 @@ document.getElementById("attendanceNav").classList.remove("hidden");
 await loadRoster();
 await loadSubjects();
 await loadAnnouncements();
+await loadAttendanceDashboard();
 
 }catch(errorObject){
 
@@ -436,7 +437,43 @@ errorObject.message||"App load failed.";
 
 }
 }
+async function loadAttendanceDashboard(){
 
+  try{
+
+    const today = new Date().toISOString().split("T")[0];
+
+    const rows = await request(
+      "/rest/v1/attendance?attendance_date=eq."+
+      today+
+      "&select=subject_id,roster_student_id,status,attendance_date"
+    );
+
+    const total = roster.length;
+
+    const present = rows.filter(
+      r => r.status === "present"
+    ).length;
+
+    const absent = rows.filter(
+      r => r.status === "absent"
+    ).length;
+
+    const percentage = total
+      ? ((present / total) * 100).toFixed(1)
+      : "0.0";
+
+    document.getElementById("dashPresent").textContent = present;
+    document.getElementById("dashAbsent").textContent = absent;
+    document.getElementById("dashPercentage").textContent =
+      percentage + "%";
+
+  }catch(error){
+
+    console.error("Dashboard error:",error);
+
+  }
+  }
 
 /* =========================
    ROSTER
