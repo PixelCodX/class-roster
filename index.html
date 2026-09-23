@@ -155,17 +155,17 @@ main{padding:12px}
 
 <div class="card">
   <h2>📅 Recent Attendance</h2>
-  <div class="card">
-  <h2>👤 Student-wise Attendance</h2>
-  <div id="studentAttendance">
-    <p>Attendance data will appear here.</p>
-  </div>
-  </div>
   <div id="attendanceHistory">
     <p>No attendance records yet.</p>
   </div>
 </div>
 
+<div class="card">
+  <h2>👤 Student-wise Attendance</h2>
+  <div id="studentAttendance">
+    <p>Attendance data will appear here.</p>
+  </div>
+</div>
 </section>
 
 <!-- ROSTER -->
@@ -422,10 +422,13 @@ document.getElementById("pUsername").textContent=profile.username||"-";
 document.getElementById("pRoll").textContent=profile.roll_no||"-";
 document.getElementById("pRole").textContent=profile.role||"-";
 
-if(profile.role==="admin"||profile.role==="cr"){
-document.getElementById("createNav").classList.remove("hidden");
-document.getElementById("attendanceNav").classList.remove("hidden");
-   }
+if(profile.role==="admin" || profile.role==="cr"){
+  document.getElementById("createNav").classList.remove("hidden");
+  document.getElementById("attendanceNav").classList.remove("hidden");
+}else{
+  document.getElementById("createNav").classList.add("hidden");
+  document.getElementById("attendanceNav").classList.add("hidden");
+  }
 
 await loadRoster();
 await loadSubjects();
@@ -916,8 +919,10 @@ body:JSON.stringify(rows)
 }
 );
 
-message.innerHTML=
+message.innerHTML =
 '<div class="message success">Attendance saved successfully.</div>';
+
+await loadAttendanceDashboard();
 
 }catch(errorObject){
 
