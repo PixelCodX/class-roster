@@ -451,14 +451,22 @@ async function loadAttendanceDashboard(){
       "/rest/v1/attendance?select=subject_id,roster_student_id,status,attendance_date"
     );
 
-    const subjectBox = document.getElementById("subjectAttendance");
-
     if(!rows || rows.length === 0){
-      subjectBox.innerHTML = "<p>No attendance records yet.</p>";
+      document.getElementById("subjectAttendance").innerHTML =
+        "<p>No attendance records yet.</p>";
+
+      document.getElementById("attendanceHistory").innerHTML =
+        "<p>No attendance records yet.</p>";
+
+      document.getElementById("studentAttendance").innerHTML =
+        "<p>No attendance records yet.</p>";
+
       return;
     }
 
-    let html = "";
+    /* SUBJECT-WISE */
+
+    let subjectHTML = "";
 
     subjects.forEach(subject => {
 
@@ -466,15 +474,15 @@ async function loadAttendanceDashboard(){
         r => r.subject_id === subject.id
       );
 
-      const total = subjectRows.length;
+      if(subjectRows.length === 0){
 
-      if(total === 0){
-        html += `
+        subjectHTML += `
           <div class="card">
             <b>${escapeHTML(subject.name)}</b>
             <p>No attendance marked yet.</p>
           </div>
         `;
+
         return;
       }
 
@@ -482,13 +490,14 @@ async function loadAttendanceDashboard(){
         r => r.status === "present"
       ).length;
 
-      const percentage = ((present / total) * 100).toFixed(1);
+      const percentage =
+        ((present / subjectRows.length) * 100).toFixed(1);
 
-      html += `
+      subjectHTML += `
         <div class="card">
           <b>${escapeHTML(subject.name)}</b>
           <p>
-            Present: ${present} / ${total}
+            Present: ${present}/${subjectRows.length}
             &nbsp; • &nbsp;
             Attendance: ${percentage}%
           </p>
@@ -497,127 +506,159 @@ async function loadAttendanceDashboard(){
 
     });
 
-    subjectBox.innerHTML = html;
-const historyBox = document.getElementById("attendanceHistory");
+    document.getElementById("subjectAttendance").innerHTML =
+      subjectHTML;
 
-const historyMap = {};
 
-rows.forEach(row => {
+    /* DATE + SUBJECT HISTORY */
 
-  const key = row.attendance_date + "_" + row.subject_id;
+    const historyMap = {};
 
-  if(!historyMap[key]){
-    historyMap[key] = {
-      date: row.attendance_date,
-      subject_id: row.subject_id,
-      present: 0,
-      total: 0
-    };
-  }
+    rows.forEach(row => {
 
-  historyMap[key].total++;
+      const key =
+        row.attendance_date + "_" + row.subject_id;
 
-  if(row.status === "present"){
-    historyMap[key].present++;
-  }
+      if(!historyMap[key]){
 
-});
+        historyMap[key] = {
+          date: row.attendance_date,
+          subject_id: row.subject_id,
+          present: 0,
+          total: 0
+        };
 
-let historyHTML = "";
+      }
 
-Object.values(historyMap)
-  .sort((a,b) => b.date.localeCompare(a.date))
-  .slice(0,10)
-  .forEach(item => {
+      historyMap[key].total++;
 
-    const subject = subjects.find(
-      s => s.id === item.subject_id
-    );
+      if(row.status === "present"){
+        historyMap[key].present++;
+      }
 
-    const percentage =
-      ((item.present / item.total) * 100).toFixed(1);
+    });
 
-    historyHTML += `
-      <div class="card">
-        <b>${escapeHTML(subject ? subject.name : "Unknown Subject")}</b>
-        <p>
-          📅 ${item.date}
-          &nbsp; • &nbsp;
-          Present: ${item.present}/${item.total}
-          &nbsp; • &nbsp;
-          ${percentage}%
-        </p>
-      </div>
-    `;
+    let historyHTML = "";
 
-  });
+    Object.values(historyMap)
+      .sort((a,b) => b.date.localeCompare(a.date))
+      .slice(0,10)
+      .forEach(item => {
 
-historyBox.innerHTML =
-  historyHTML || "<p>No attendance records yet.</p>";
+        const subject = subjects.find(
+          s => s.id === item.subject_id
+        );
+
+        const percentage =
+          ((item.present / item.total) * 100).toFixed(1);
+
+        historyHTML += `
+          <div class="card">
+            <b>${escapeHTML(
+              subject ? subject.name : "Unknown Subject"
+            )}</b>
+
+            <p>
+              📅 ${item.date}
+              &nbsp; • &nbsp;
+              Present: ${item.present}/${item.total}
+              &nbsp; • &nbsp;
+              ${percentage}%
+            </p>
+          </div>
+        `;
+
+      });
+
+    document.getElementById("attendanceHistory").innerHTML =
+      historyHTML || "<p>No attendance records yet.</p>";
+
+
+    /* STUDENT-WISE */
+
+    const studentMap = {};
+
+    rows.forEach(row => {
+
+      const id = row.roster_student_id;
+
+      if(!studentMap[id]){
+
+        studentMap[id] = {
+          present: 0,
+          absent: 0
+        };
+
+      }
+
+      if(row.status === "present"){
+        studentMap[id].present++;
+      }
+
+      if(row.status === "absent"){
+        studentMap[id].absent++;
+      }
+
+    });
+
+    let studentHTML = "";
+
+    roster.forEach(student => {
+
+      const data = studentMap[student.id] || {
+        present: 0,
+        absent: 0
+      };
+
+      const total =
+        data.present + data.absent;
+
+      const percentage = total
+        ? ((data.present / total) * 100).toFixed(1)
+        : "0.0";
+
+      studentHTML += `
+        <div class="card">
+
+          <b>${escapeHTML(student.full_name)}</b>
+
+          <p>
+            ${escapeHTML(student.roll_no)}
+            &nbsp; • &nbsp;
+            Present: ${data.present}
+            &nbsp; • &nbsp;
+            Absent: ${data.absent}
+            &nbsp; • &nbsp;
+            Attendance: ${percentage}%
+          </p>
+
+        </div>
+      `;
+
+    });
+
+    document.getElementById("studentAttendance").innerHTML =
+      studentHTML;
+
+
   }catch(error){
 
-    console.error("Subject attendance error:",error);
+    console.error(
+      "Attendance dashboard error:",
+      error
+    );
 
     document.getElementById("subjectAttendance").innerHTML =
-      "<p>Unable to load subject attendance.</p>";
-    const studentBox = document.getElementById("studentAttendance");
+      "<p>Unable to load attendance.</p>";
 
-const studentMap = {};
+    document.getElementById("attendanceHistory").innerHTML =
+      "<p>Unable to load attendance.</p>";
 
-rows.forEach(row => {
-
-  const id = row.roster_student_id;
-
-  if(!studentMap[id]){
-    studentMap[id] = {
-      present: 0,
-      absent: 0
-    };
-  }
-
-  if(row.status === "present"){
-    studentMap[id].present++;
-  }else if(row.status === "absent"){
-    studentMap[id].absent++;
-  }
-
-});
-
-let studentHTML = "";
-
-roster.forEach(student => {
-
-  const data = studentMap[student.id] || {
-    present: 0,
-    absent: 0
-  };
-
-  const total = data.present + data.absent;
-
-  const percentage = total
-    ? ((data.present / total) * 100).toFixed(1)
-    : "0.0";
-
-  studentHTML += `
-    <div class="card">
-      <b>${escapeHTML(student.full_name)}</b>
-      <p>
-        ${escapeHTML(student.roll_no)}
-        &nbsp; • &nbsp;
-        Present: ${data.present}
-        &nbsp; • &nbsp;
-        Absent: ${data.absent}
-        &nbsp; • &nbsp;
-        Attendance: ${percentage}%
-      </p>
-    </div>
-  `;
-
-});
-
-studentBox.innerHTML = studentHTML;
+    document.getElementById("studentAttendance").innerHTML =
+      "<p>Unable to load attendance.</p>";
 
   }
+
   }
 
 /* =========================
