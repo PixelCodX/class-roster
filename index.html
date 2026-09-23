@@ -239,7 +239,22 @@ main{padding:12px}
 <button class="save" onclick="saveAttendance()">Save Attendance</button>
 </div>
 </section>
+<!-- STUDENT DETAILS -->
+<section id="studentDetails" class="hidden">
+  <div class="card">
+    <h2>👤 Student Details</h2>
 
+    <div id="studentDetailsContent">
+      Loading...
+    </div>
+
+    <button
+      class="primary"
+      onclick="showPage('dashboard',document.querySelector('.nav button'))">
+      ← Back to Dashboard
+    </button>
+  </div>
+</section>
 <!-- PROFILE -->
 <section id="profile" class="hidden">
 <div class="card">
