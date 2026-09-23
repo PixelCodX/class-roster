@@ -196,7 +196,17 @@ main{padding:12px}
 </div>
 </div>
 </section>
+<!-- SUBJECTS -->
+<section id="subjectsPage" class="hidden">
 
+  <div class="card">
+    <h2>📚 BVSA Semester 1 Subjects</h2>
+    <p>RKMVERI Ranchi</p>
+  </div>
+
+  <div id="subjectsPageList"></div>
+
+</section>
 <!-- ANNOUNCEMENTS -->
 <section id="announcements" class="hidden">
 <div class="card">
@@ -1040,7 +1050,25 @@ ${escapeHTML(subject.name)}
 `;
 
 });
+const subjectsPageList =
+  document.getElementById("subjectsPageList");
 
+if(subjectsPageList){
+
+  subjectsPageList.innerHTML = "";
+
+  subjects.forEach((subject,index)=>{
+
+    subjectsPageList.innerHTML += `
+      <div class="card">
+        <h3>${index + 1}. ${escapeHTML(subject.name)}</h3>
+        <p>BVSA Semester 1</p>
+      </div>
+    `;
+
+  });
+
+  }
 }
 
 
