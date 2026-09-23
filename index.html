@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BVSA Class Roster</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f4f7fb;
+  color:#172033;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* LOGIN */
+#loginPage{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+}
+
+.login-box{
+  width:100%;
+  max-width:400px;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.2);
+}
+
+.login-box h1{
+  text-align:center;
+  margin-bottom:8px;
+}
+
+.login-box p{
+  text-align:center;
+  color:#667085;
+  margin-bottom:25px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  margin-top:7px;
+  margin-bottom:15px;
+  font-size:15px;
+}
+
+label{
+  font-size:14px;
+  font-weight:bold;
+}
+
+.primary{
+  width:100%;
+  border:0;
+  padding:13px;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.primary:hover{
+  background:#1d4ed8;
+}
+
+.error{
+  color:#dc2626;
+  text-align:center;
+  margin-top:12px;
+}
+
+/* APP */
+#app{
+  min-height:100vh;
+}
+
+header{
+  background:linear-gradient(135deg,#2563eb,#4f46e5);
+  color:white;
+  padding:18px;
+}
+
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+header h1{
+  font-size:21px;
+}
+
+header small{
+  opacity:.85;
+}
+
+.logout{
+  border:0;
+  padding:9px 14px;
+  border-radius:8px;
+  background:white;
+  color:#2563eb;
+  font-weight:bold;
+}
+
+nav{
+  background:white;
+  border-bottom:1px solid #ddd;
+  overflow-x:auto;
+}
+
+.nav-inner{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+}
+
+.nav-btn{
+  border:0;
+  background:white;
+  padding:15px;
+  font-weight:bold;
+  color:#667085;
+  white-space:nowrap;
+}
+
+.nav-btn.active{
+  color:#2563eb;
+  border-bottom:3px solid #2563eb;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
+
+.card h2{
+  margin-bottom:15px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+.stat{
+  padding:20px;
+  border-radius:15px;
+  background:#eff6ff;
+}
+
+.stat h3{
+  font-size:28px;
+  color:#2563eb;
+}
+
+.stat p{
+  color:#667085;
+}
+
+/* TABLE */
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+}
+
+th{
+  background:#f8fafc;
+}
+
+/* ANNOUNCEMENT */
+.announcement{
+  border-left:4px solid #2563eb;
+  padding:15px;
+  background:#f8fafc;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+
+.announcement h3{
+  margin-bottom:6px;
+}
+
+.announcement small{
+  color:#667085;
+}
+
+/* ATTENDANCE */
+.attendance-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px;
+  border-bottom:1px solid #eee;
+}
+
+.student-info{
+  flex:1;
+}
+
+.student-name{
+  font-weight:bold;
+}
+
+.roll{
+  color:#667085;
+  font-size:13px;
+}
+
+.status-buttons{
+  display:flex;
+  gap:7px;
+}
+
+.status-btn{
+  border:1px solid #ddd;
+  padding:8px 12px;
+  border-radius:8px;
+  background:white;
+  font-weight:bold;
+}
+
+.present.selected{
+  background:#16a34a;
+  color:white;
+  border-color:#16a34a;
+}
+
+.absent.selected{
+  background:#dc2626;
+  color:white;
+  border-color:#dc2626;
+}
+
+.save-btn{
+  margin-top:20px;
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#16a34a;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.message{
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:15px;
+  background:#eff6ff;
+  color:#1d4ed8;
+}
+
+.danger{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.success{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+@media(max-width:600px){
+  main{
+    padding:12px;
+  }
+
+  .attendance-row{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .status-buttons{
+    width:100%;
+  }
+
+  .status-btn{
+    flex:1;
+  }
+
+  .header-inner{
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<section id="loginPage">
+
+  <div class="login-box">
+
+    <h1>BVSA Class Roster</h1>
+    <p>RKMVERI Ranchi • Semester 1</p>
+
+    <label>Email</label>
+    <input id="email" type="email" placeholder="Enter your email">
+
+    <label>Password</label>
+    <input id="password" type="password" placeholder="Enter your password">
+
+    <button class="primary" onclick="login()">Login</button>
+
+    <div id="loginError" class="error"></div>
+
+  </div>
+
+</section>
+
+
+<!-- APP -->
+<section id="app" class="hidden">
+
+<header>
+  <div class="header-inner">
+    <div>
+      <h1>BVSA Class Roster</h1>
+      <small id="headerUser"></small>
+    </div>
+
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+</header>
+
+
+<nav>
+  <div class="nav-inner">
+
+    <button class="nav-btn active" onclick="showPage('dashboard',this)">
+      Dashboard
+    </button>
+
+    <button class="nav-btn" onclick="showPage('roster',this)">
+      Class Roster
+    </button>
+
+    <button class="nav-btn" onclick="showPage('announcements',this)">
+      Announcements
+    </button>
+
+    <button id="createAnnouncementNav"
+            class="nav-btn hidden"
+            onclick="showPage('createAnnouncement',this)">
+      Create Announcement
+    </button>
+
+    <button id="attendanceNav"
+            class="nav-btn hidden"
+            onclick="showPage('attendance',this)">
+      Attendance
+    </button>
+
+    <button class="nav-btn" onclick="showPage('profile',this)">
+      Profile
+    </button>
+
+  </div>
+</nav>
+
+
+<main>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="page">
+
+  <div class="card">
+    <h2>Welcome 👋</h2>
+    <p>BVSA Semester 1 Class Management System</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="stat">
+      <h3 id="studentCount">-</h3>
+      <p>Total Students</p>
+    </div>
+
+    <div class="stat">
+      <h3>6</h3>
+      <p>Subjects</p>
+    </div>
+
+    <div class="stat">
+      <h3 id="announcementCount">-</h3>
+      <p>Announcements</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ROSTER -->
+<section id="roster" class="page hidden">
+
+  <div class="card">
+
+    <h2>Class Roster</h2>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Roll No.</th>
+          </tr>
+        </thead>
+
+        <tbody id="rosterBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ANNOUNCEMENTS -->
+<section id="announcements" class="page hidden">
+
+  <div class="card">
+
+    <h2>Announcements</h2>
+
+    <div id="announcementList">
+      Loading...
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CREATE ANNOUNCEMENT -->
+<section id="createAnnouncement" class="page hidden">
+
+  <div class="card">
+
+    <h2>Create Announcement</h2>
+
+    <label>Title</label>
+    <input id="announcementTitle"
+           placeholder="Announcement title">
+
+    <label>Message</label>
+    <textarea id="announcementBody"
+              rows="6"
+              placeholder="Write announcement..."></textarea>
+
+    <button class="primary"
+            onclick="createAnnouncement()">
+      Publish Announcement
+    </button>
+
+    <div id="announcementMessage"></div>
+
+  </div>
+
+</section>
+
+
+<!-- ATTENDANCE -->
+<section id="attendance" class="page hidden">
+
+  <div class="card">
+
+    <h2>Mark Attendance</h2>
+
+    <label>Subject</label>
+    <select id="attendanceSubject">
+      <option value="">Select Subject</option>
+    </select>
+
+    <label>Date</label>
+    <input id="attendanceDate" type="date">
+
+    <div id="attendanceMessage"></div>
+
+    <div id="attendanceList"></div>
+
+    <button class="save-btn"
+            onclick="saveAttendance()">
+      Save Attendance
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile" class="page hidden">
+
+  <div class="card">
+
+    <h2>My Profile</h2>
+
+    <div class="grid">
+
+      <div>
+        <b>Full Name</b>
+        <p id="profileName">-</p>
+      </div>
+
+      <div>
+        <b>Username</b>
+        <p id="profileUsername">-</p>
+      </div>
+
+      <div>
+        <b>Roll No.</b>
+        <p id="profileRoll">-</p>
+      </div>
+
+      <div>
+        <b>Role</b>
+        <p id="profileRole">-</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+</section>
+
+
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+"https://cxhhewyegzhfocjmjfwp.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_dBK7lW2zeXJ6PldPAU7jbA_Jpl3oOLN";
+
+const supabaseClient =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =========================
+   GLOBAL VARIABLES
+========================= */
+
+let currentUser = null;
+let currentProfile = null;
+let roster = [];
+let subjects = [];
+let attendanceData = {};
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function login(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const error =
+    document.getElementById("loginError");
+
+  error.textContent = "";
+
+  if(!email || !password){
+    error.textContent =
+      "Email aur password dono enter karo.";
+    return;
+  }
+
+  const {data,error:loginError} =
+    await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+  if(loginError){
+
+    error.textContent =
+      loginError.message;
+
+    return;
+  }
+
+  currentUser = data.user;
+
+  await loadApplication();
+
+}
+
+
+/* =========================
+   LOAD APPLICATION
+========================= */
+
+async function loadApplication(){
+
+  const {data:userData,error:userError} =
+    await supabaseClient.auth.getUser();
+
+  if(userError || !userData.user){
+
+    showLogin();
+    return;
+  }
+
+  currentUser = userData.user;
+
+
+  const {data:profile,error:profileError} =
+    await supabaseClient
+      .from("profiles")
+      .select("*")
+      .eq("id",currentUser.id)
+      .single();
+
+
+  if(profileError){
+
+    document.getElementById("loginError").textContent =
+      "Profile load nahi ho raha: " +
+      profileError.message;
+
+    return;
+  }
+
+
+  currentProfile = profile;
+
+
+  document.getElementById("loginPage")
+    .classList.add("hidden");
+
+  document.getElementById("app")
+    .classList.remove("hidden");
+
+
+  document.getElementById("headerUser").textContent =
+    `${profile.full_name} • ${profile.role}`;
+
+
+  document.getElementById("profileName").textContent =
+    profile.full_name || "-";
+
+  document.getElementById("profileUsername").textContent =
+    profile.username || "-";
+
+  document.getElementById("profileRoll").textContent =
+    profile.roll_no || "-";
+
+  document.getElementById("profileRole").textContent =
+    profile.role || "-";
+
+
+  if(
+    profile.role === "admin" ||
+    profile.role === "cr"
+  ){
+
+    document
+      .getElementById("createAnnouncementNav")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("attendanceNav")
+      .classList.remove("hidden");
+
+  }
+
+
+  await loadRoster();
+  await loadAnnouncements();
+  await loadSubjects();
+
+}
+
+
+/* =========================
+   LOGIN PAGE
+========================= */
+
+function showLogin(){
+
+  document
+    .getElementById("app")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginPage")
+    .classList.remove("hidden");
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  currentUser = null;
+  currentProfile = null;
+
+  showLogin();
+
+}
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function showPage(pageId,button){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(page=>{
+      page.classList.add("hidden");
+    });
+
+
+  document
+    .getElementById(pageId)
+    .classList.remove("hidden");
+
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
+
+
+  if(button){
+    button.classList.add("active");
+  }
+
+
+  if(pageId === "attendance"){
+    renderAttendance();
+  }
+
+}
+
+
+/* =========================
+   ROSTER
+========================= */
+
+async function loadRoster(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("class_roster")
+      .select("*")
+      .order("roll_no");
+
+
+  if(error){
+
+    console.error(error);
+
+    document.getElementById("rosterBody").innerHTML =
+      `<tr>
+        <td colspan="3">
+          Error loading roster
+        </td>
+      </tr>`;
+
+    return;
+  }
+
+
+  roster = data || [];
+
+
+  document.getElementById("studentCount")
+    .textContent = roster.length;
+
+
+  const body =
+    document.getElementById("rosterBody");
+
+
+  body.innerHTML = "";
+
+
+  roster.forEach((student,index)=>{
+
+    const row =
+      document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${escapeHTML(student.full_name)}</td>
+      <td>${escapeHTML(student.roll_no)}</td>
+    `;
+
+    body.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================
+   SUBJECTS
+========================= */
+
+async function loadSubjects(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("subjects")
+      .select("*")
+      .order("name");
+
+
+  if(error){
+
+    console.error(error);
+    return;
+  }
+
+
+  subjects = data || [];
+
+
+  const select =
+    document.getElementById("attendanceSubject");
+
+
+  select.innerHTML =
+    `<option value="">Select Subject</option>`;
+
+
+  subjects.forEach(subject=>{
+
+    const option =
+      document.createElement("option");
+
+    option.value = subject.id;
+    option.textContent = subject.name;
+
+    select.appendChild(option);
+
+  });
+
+}
+
+
+/* =========================
+   ANNOUNCEMENTS
+========================= */
+
+async function loadAnnouncements(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("announcements")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+
+  if(error){
+
+    console.error(error);
+
+    document.getElementById("announcementList").innerHTML =
+      "Announcements load nahi ho rahe.";
+
+    return;
+  }
+
+
+  const announcements = data || [];
+
+
+  document.getElementById("announcementCount")
+    .textContent = announcements.length;
+
+
+  const list =
+    document.getElementById("announcementList");
+
+
+  if(announcements.length === 0){
+
+    list.innerHTML =
+      "<p>No announcements yet.</p>";
+
+    return;
+  }
+
+
+  list.innerHTML = "";
+
+
+  announcements.forEach(item=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className = "announcement";
+
+
+    const date =
+      item.created_at
+        ? new Date(item.created_at)
+            .toLocaleString()
+        : "";
+
+
+    div.innerHTML = `
+      <h3>${escapeHTML(item.title)}</h3>
+      <p>${escapeHTML(item.body)}</p>
+      <small>${date}</small>
+    `;
+
+
+    list.appendChild(div);
+
+  });
+
+}
+
+
+/* =========================
+   CREATE ANNOUNCEMENT
+========================= */
+
+async function createAnnouncement(){
+
+  const title =
+    document
+      .getElementById("announcementTitle")
+      .value
+      .trim();
+
+
+  const body =
+    document
+      .getElementById("announcementBody")
+      .value
+      .trim();
+
+
+  const message =
+    document.getElementById(
+      "announcementMessage"
+    );
+
+
+  message.innerHTML = "";
+
+
+  if(!title || !body){
+
+    message.innerHTML =
+      `<div class="message danger">
+        Title aur message dono bharna zaroori hai.
+      </div>`;
+
+    return;
+  }
+
+
+  if(
+    !currentProfile ||
+    !["admin","cr"].includes(currentProfile.role)
+  ){
+
+    message.innerHTML =
+      `<div class="message danger">
+        Sirf Admin/CR announcement create kar sakte hain.
+      </div>`;
+
+    return;
+  }
+
+
+  const {error} =
+    await supabaseClient
+      .from("announcements")
+      .insert({
+        author_id:currentUser.id,
+        title:title,
+        body:body
+      });
+
+
+  if(error){
+
+    message.innerHTML =
+      `<div class="message danger">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+    return;
+  }
+
+
+  message.innerHTML =
+    `<div class="message success">
+      Announcement published successfully.
+    </div>`;
+
+
+  document.getElementById(
+    "announcementTitle"
+  ).value = "";
+
+
+  document.getElementById(
+    "announcementBody"
+  ).value = "";
+
+
+  await loadAnnouncements();
+
+}
+
+
+/* =========================
+   ATTENDANCE RENDER
+========================= */
+
+function renderAttendance(){
+
+  const list =
+    document.getElementById(
+      "attendanceList"
+    );
+
+
+  if(roster.length === 0){
+
+    list.innerHTML =
+      "<p>Roster loading...</p>";
+
+    return;
+  }
+
+
+  list.innerHTML = "";
+
+
+  roster.forEach(student=>{
+
+    if(!attendanceData[student.id]){
+      attendanceData[student.id] = "";
+    }
+
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "attendance-row";
+
+
+    row.innerHTML = `
+
+      <div class="student-info">
+
+        <div class="student-name">
+          ${escapeHTML(student.full_name)}
+        </div>
+
+        <div class="roll">
+          ${escapeHTML(student.roll_no)}
+        </div>
+
+      </div>
+
+
+      <div class="status-buttons">
+
+        <button
+          class="status-btn present ${
+            attendanceData[student.id] === "present"
+              ? "selected"
+              : ""
+          }"
+          onclick="setAttendance(${student.id},'present')">
+          Present
+        </button>
+
+
+        <button
+          class="status-btn absent ${
+            attendanceData[student.id] === "absent"
+              ? "selected"
+              : ""
+          }"
+          onclick="setAttendance(${student.id},'absent')">
+          Absent
+        </button>
+
+      </div>
+
+    `;
+
+
+    list.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================
+   SET ATTENDANCE
+========================= */
+
+function setAttendance(studentId,status){
+
+  attendanceData[studentId] = status;
+
+  renderAttendance();
+
+}
+
+
+/* =========================
+   SAVE ATTENDANCE
+========================= */
+
+async function saveAttendance(){
+
+  const subjectId =
+    document.getElementById(
+      "attendanceSubject"
+    ).value;
+
+
+  const date =
+    document.getElementById(
+      "attendanceDate"
+    ).value;
+
+
+  const message =
+    document.getElementById(
+      "attendanceMessage"
+    );
+
+
+  message.innerHTML = "";
+
+
+  if(!subjectId){
+
+    message.innerHTML =
+      `<div class="message danger">
+        Please select a subject.
+      </div>`;
+
+    return;
+  }
+
+
+  if(!date){
+
+    message.innerHTML =
+      `<div class="message danger">
+        Please select attendance date.
+      </div>`;
+
+    return;
+  }
+
+
+  if(
+    !currentProfile ||
+    !["admin","cr"].includes(currentProfile.role)
+  ){
+
+    message.innerHTML =
+      `<div class="message danger">
+        Sirf Admin/CR attendance mark kar sakte hain.
+      </div>`;
+
+    return;
+  }
+
+
+  const incomplete =
+    roster.filter(
+      student =>
+        !attendanceData[student.id]
+    );
+
+
+  if(incomplete.length > 0){
+
+    message.innerHTML =
+      `<div class="message danger">
+        Sabhi ${roster.length} students ka Present/Absent mark karo.
+      </div>`;
+
+    return;
+  }
+
+
+  const {error:deleteError} =
+    await supabaseClient
+      .from("attendance")
+      .delete()
+      .eq("subject_id",subjectId)
+      .eq("attendance_date",date);
+
+
+  if(deleteError){
+
+    message.innerHTML =
+      `<div class="message danger">
+        Old attendance delete nahi hui:
+        ${escapeHTML(deleteError.message)}
+      </div>`;
+
+    return;
+  }
+
+
+  const rows =
+    roster.map(student=>({
+
+      subject_id:subjectId,
+
+      roster_student_id:Number(student.id),
+
+      attendance_date:date,
+
+      status:attendanceData[student.id],
+
+      marked_by:currentUser.id
+
+    }));
+
+
+  const {error:insertError} =
+    await supabaseClient
+      .from("attendance")
+      .insert(rows)
