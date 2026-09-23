@@ -174,6 +174,12 @@ main{padding:12px}
 <div class="card">
 <h2>Class Roster</h2>
 <div class="table">
+  <input
+  id="rosterSearch"
+  type="text"
+  placeholder="🔎 Search student by name or roll number..."
+  oninput="filterRoster()"
+>
 <table>
 <thead>
 <tr><th>#</th><th>Name</th><th>Roll No.</th></tr>
