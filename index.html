@@ -8,32 +8,55 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 
 body{
   background:#f4f7fb;
   color:#172033;
 }
 
+.hidden{display:none!important}
+
 button{
   cursor:pointer;
 }
 
-.hidden{
-  display:none!important;
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  margin:7px 0 15px;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  font-size:15px;
+}
+
+label{
+  font-size:14px;
+  font-weight:bold;
+}
+
+.primary{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.primary:active{
+  transform:scale(.98);
 }
 
 /* LOGIN */
+
 #loginPage{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   padding:20px;
   background:linear-gradient(135deg,#2563eb,#7c3aed);
 }
@@ -58,46 +81,19 @@ button{
   margin-bottom:25px;
 }
 
-input,select,textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #d0d5dd;
-  border-radius:10px;
-  margin-top:7px;
-  margin-bottom:15px;
-  font-size:15px;
-}
-
-label{
-  font-size:14px;
-  font-weight:bold;
-}
-
-.primary{
-  width:100%;
-  border:0;
-  padding:13px;
-  border-radius:10px;
-  background:#2563eb;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-}
-
-.primary:hover{
-  background:#1d4ed8;
-}
-
 .error{
   color:#dc2626;
-  text-align:center;
   margin-top:12px;
+  text-align:center;
 }
 
-/* APP */
-#app{
-  min-height:100vh;
+.success{
+  color:#15803d;
+  margin-top:12px;
+  text-align:center;
 }
+
+/* HEADER */
 
 header{
   background:linear-gradient(135deg,#2563eb,#4f46e5);
@@ -111,7 +107,6 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:15px;
 }
 
 header h1{
@@ -119,7 +114,7 @@ header h1{
 }
 
 header small{
-  opacity:.85;
+  opacity:.9;
 }
 
 .logout{
@@ -130,6 +125,8 @@ header small{
   color:#2563eb;
   font-weight:bold;
 }
+
+/* NAV */
 
 nav{
   background:white;
@@ -147,8 +144,8 @@ nav{
   border:0;
   background:white;
   padding:15px;
-  font-weight:bold;
   color:#667085;
+  font-weight:bold;
   white-space:nowrap;
 }
 
@@ -156,6 +153,8 @@ nav{
   color:#2563eb;
   border-bottom:3px solid #2563eb;
 }
+
+/* MAIN */
 
 main{
   max-width:1100px;
@@ -197,6 +196,7 @@ main{
 }
 
 /* TABLE */
+
 .table-wrap{
   overflow-x:auto;
 }
@@ -217,6 +217,7 @@ th{
 }
 
 /* ANNOUNCEMENT */
+
 .announcement{
   border-left:4px solid #2563eb;
   padding:15px;
@@ -234,10 +235,11 @@ th{
 }
 
 /* ATTENDANCE */
+
 .attendance-row{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:10px;
   padding:12px;
   border-bottom:1px solid #eee;
@@ -272,19 +274,17 @@ th{
 .present.selected{
   background:#16a34a;
   color:white;
-  border-color:#16a34a;
 }
 
 .absent.selected{
   background:#dc2626;
   color:white;
-  border-color:#dc2626;
 }
 
 .save-btn{
-  margin-top:20px;
   width:100%;
   padding:14px;
+  margin-top:20px;
   border:0;
   border-radius:10px;
   background:#16a34a;
@@ -295,10 +295,9 @@ th{
 
 .message{
   padding:12px;
+  margin:10px 0;
   border-radius:8px;
-  margin-bottom:15px;
   background:#eff6ff;
-  color:#1d4ed8;
 }
 
 .danger{
@@ -306,19 +305,25 @@ th{
   color:#b91c1c;
 }
 
-.success{
+.success-box{
   background:#dcfce7;
   color:#15803d;
 }
 
 @media(max-width:600px){
+
   main{
     padding:12px;
   }
 
-  .attendance-row{
+  .header-inner{
     align-items:flex-start;
+    gap:10px;
+  }
+
+  .attendance-row{
     flex-direction:column;
+    align-items:flex-start;
   }
 
   .status-buttons{
@@ -328,10 +333,6 @@ th{
   .status-btn{
     flex:1;
   }
-
-  .header-inner{
-    align-items:flex-start;
-  }
 }
 </style>
 </head>
@@ -339,245 +340,355 @@ th{
 <body>
 
 <!-- LOGIN -->
+
 <section id="loginPage">
 
-  <div class="login-box">
+<div class="login-box">
 
-    <h1>BVSA Class Roster</h1>
-    <p>RKMVERI Ranchi • Semester 1</p>
+<h1>BVSA Class Roster</h1>
 
-    <label>Email</label>
-    <input id="email" type="email" placeholder="Enter your email">
+<p>RKMVERI Ranchi • Semester 1</p>
 
-    <label>Password</label>
-    <input id="password" type="password" placeholder="Enter your password">
+<label>Email</label>
 
-    <button class="primary" onclick="login()">Login</button>
+<input
+  id="email"
+  type="email"
+  placeholder="Enter your email"
+>
 
-    <div id="loginError" class="error"></div>
+<label>Password</label>
 
-  </div>
+<input
+  id="password"
+  type="password"
+  placeholder="Enter your password"
+>
+
+<button
+  id="loginButton"
+  class="primary"
+  type="button"
+>
+Login
+</button>
+
+<div id="loginError" class="error"></div>
+
+</div>
 
 </section>
 
 
 <!-- APP -->
+
 <section id="app" class="hidden">
 
 <header>
-  <div class="header-inner">
-    <div>
-      <h1>BVSA Class Roster</h1>
-      <small id="headerUser"></small>
-    </div>
 
-    <button class="logout" onclick="logout()">Logout</button>
-  </div>
+<div class="header-inner">
+
+<div>
+
+<h1>BVSA Class Roster</h1>
+
+<small id="headerUser"></small>
+
+</div>
+
+<button
+  class="logout"
+  id="logoutButton"
+  type="button"
+>
+Logout
+</button>
+
+</div>
+
 </header>
 
 
 <nav>
-  <div class="nav-inner">
 
-    <button class="nav-btn active" onclick="showPage('dashboard',this)">
-      Dashboard
-    </button>
+<div class="nav-inner">
 
-    <button class="nav-btn" onclick="showPage('roster',this)">
-      Class Roster
-    </button>
+<button
+  class="nav-btn active"
+  data-page="dashboard"
+>
+Dashboard
+</button>
 
-    <button class="nav-btn" onclick="showPage('announcements',this)">
-      Announcements
-    </button>
+<button
+  class="nav-btn"
+  data-page="roster"
+>
+Class Roster
+</button>
 
-    <button id="createAnnouncementNav"
-            class="nav-btn hidden"
-            onclick="showPage('createAnnouncement',this)">
-      Create Announcement
-    </button>
+<button
+  class="nav-btn"
+  data-page="announcements"
+>
+Announcements
+</button>
 
-    <button id="attendanceNav"
-            class="nav-btn hidden"
-            onclick="showPage('attendance',this)">
-      Attendance
-    </button>
+<button
+  id="createAnnouncementNav"
+  class="nav-btn hidden"
+  data-page="createAnnouncement"
+>
+Create Announcement
+</button>
 
-    <button class="nav-btn" onclick="showPage('profile',this)">
-      Profile
-    </button>
+<button
+  id="attendanceNav"
+  class="nav-btn hidden"
+  data-page="attendance"
+>
+Attendance
+</button>
 
-  </div>
+<button
+  class="nav-btn"
+  data-page="profile"
+>
+Profile
+</button>
+
+</div>
+
 </nav>
 
 
 <main>
 
 <!-- DASHBOARD -->
+
 <section id="dashboard" class="page">
 
-  <div class="card">
-    <h2>Welcome 👋</h2>
-    <p>BVSA Semester 1 Class Management System</p>
-  </div>
+<div class="card">
 
-  <div class="grid">
+<h2>Welcome 👋</h2>
 
-    <div class="stat">
-      <h3 id="studentCount">-</h3>
-      <p>Total Students</p>
-    </div>
+<p>
+BVSA Semester 1 Class Management System
+</p>
 
-    <div class="stat">
-      <h3>6</h3>
-      <p>Subjects</p>
-    </div>
+</div>
 
-    <div class="stat">
-      <h3 id="announcementCount">-</h3>
-      <p>Announcements</p>
-    </div>
+<div class="grid">
 
-  </div>
+<div class="stat">
+
+<h3 id="studentCount">0</h3>
+
+<p>Total Students</p>
+
+</div>
+
+<div class="stat">
+
+<h3>6</h3>
+
+<p>Subjects</p>
+
+</div>
+
+<div class="stat">
+
+<h3 id="announcementCount">0</h3>
+
+<p>Announcements</p>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- ROSTER -->
-<section id="roster" class="page hidden">
 
-  <div class="card">
+<section
+  id="roster"
+  class="page hidden"
+>
 
-    <h2>Class Roster</h2>
+<div class="card">
 
-    <div class="table-wrap">
+<h2>Class Roster</h2>
 
-      <table>
+<div class="table-wrap">
 
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Roll No.</th>
-          </tr>
-        </thead>
+<table>
 
-        <tbody id="rosterBody"></tbody>
+<thead>
 
-      </table>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Roll No.</th>
+</tr>
 
-    </div>
+</thead>
 
-  </div>
+<tbody id="rosterBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- ANNOUNCEMENTS -->
-<section id="announcements" class="page hidden">
 
-  <div class="card">
+<section
+  id="announcements"
+  class="page hidden"
+>
 
-    <h2>Announcements</h2>
+<div class="card">
 
-    <div id="announcementList">
-      Loading...
-    </div>
+<h2>Announcements</h2>
 
-  </div>
+<div id="announcementList">
+Loading...
+</div>
+
+</div>
 
 </section>
 
 
 <!-- CREATE ANNOUNCEMENT -->
-<section id="createAnnouncement" class="page hidden">
 
-  <div class="card">
+<section
+  id="createAnnouncement"
+  class="page hidden"
+>
 
-    <h2>Create Announcement</h2>
+<div class="card">
 
-    <label>Title</label>
-    <input id="announcementTitle"
-           placeholder="Announcement title">
+<h2>Create Announcement</h2>
 
-    <label>Message</label>
-    <textarea id="announcementBody"
-              rows="6"
-              placeholder="Write announcement..."></textarea>
+<label>Title</label>
 
-    <button class="primary"
-            onclick="createAnnouncement()">
-      Publish Announcement
-    </button>
+<input
+  id="announcementTitle"
+  placeholder="Announcement title"
+>
 
-    <div id="announcementMessage"></div>
+<label>Message</label>
 
-  </div>
+<textarea
+  id="announcementBody"
+  rows="6"
+  placeholder="Write announcement..."
+></textarea>
+
+<button
+  class="primary"
+  id="publishAnnouncementButton"
+  type="button"
+>
+Publish Announcement
+</button>
+
+<div id="announcementMessage"></div>
+
+</div>
 
 </section>
 
 
 <!-- ATTENDANCE -->
-<section id="attendance" class="page hidden">
 
-  <div class="card">
+<section
+  id="attendance"
+  class="page hidden"
+>
 
-    <h2>Mark Attendance</h2>
+<div class="card">
 
-    <label>Subject</label>
-    <select id="attendanceSubject">
-      <option value="">Select Subject</option>
-    </select>
+<h2>Mark Attendance</h2>
 
-    <label>Date</label>
-    <input id="attendanceDate" type="date">
+<label>Subject</label>
 
-    <div id="attendanceMessage"></div>
+<select id="attendanceSubject">
 
-    <div id="attendanceList"></div>
+<option value="">
+Select Subject
+</option>
 
-    <button class="save-btn"
-            onclick="saveAttendance()">
-      Save Attendance
-    </button>
+</select>
 
-  </div>
+
+<label>Date</label>
+
+<input
+  id="attendanceDate"
+  type="date"
+>
+
+
+<div id="attendanceMessage"></div>
+
+<div id="attendanceList"></div>
+
+<button
+  class="save-btn"
+  id="saveAttendanceButton"
+  type="button"
+>
+Save Attendance
+</button>
+
+</div>
 
 </section>
 
 
 <!-- PROFILE -->
-<section id="profile" class="page hidden">
 
-  <div class="card">
+<section
+  id="profile"
+  class="page hidden"
+>
 
-    <h2>My Profile</h2>
+<div class="card">
 
-    <div class="grid">
+<h2>My Profile</h2>
 
-      <div>
-        <b>Full Name</b>
-        <p id="profileName">-</p>
-      </div>
+<div class="grid">
 
-      <div>
-        <b>Username</b>
-        <p id="profileUsername">-</p>
-      </div>
+<div>
+<b>Full Name</b>
+<p id="profileName">-</p>
+</div>
 
-      <div>
-        <b>Roll No.</b>
-        <p id="profileRoll">-</p>
-      </div>
+<div>
+<b>Username</b>
+<p id="profileUsername">-</p>
+</div>
 
-      <div>
-        <b>Role</b>
-        <p id="profileRole">-</p>
-      </div>
+<div>
+<b>Roll No.</b>
+<p id="profileRoll">-</p>
+</div>
 
-    </div>
+<div>
+<b>Role</b>
+<p id="profileRole">-</p>
+</div>
 
-  </div>
+</div>
+
+</div>
 
 </section>
 
@@ -588,9 +699,9 @@ th{
 
 <script>
 
-/* =========================
-   SUPABASE
-========================= */
+/* ============================
+   SUPABASE CONFIG
+============================ */
 
 const SUPABASE_URL =
 "https://cxhhewyegzhfocjmjfwp.supabase.co";
@@ -598,87 +709,218 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_dBK7lW2zeXJ6PldPAU7jbA_Jpl3oOLN";
 
-const supabaseClient =
-supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
 
+/* ============================
+   CHECK SUPABASE LIBRARY
+============================ */
 
-/* =========================
-   GLOBAL VARIABLES
-========================= */
+if(
+  typeof window.supabase === "undefined"
+){
 
-let currentUser = null;
-let currentProfile = null;
-let roster = [];
-let subjects = [];
-let attendanceData = {};
-
-
-/* =========================
-   LOGIN
-========================= */
-
-async function login(){
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const password =
-    document.getElementById("password").value;
-
-  const error =
-    document.getElementById("loginError");
-
-  error.textContent = "";
-
-  if(!email || !password){
-    error.textContent =
-      "Email aur password dono enter karo.";
-    return;
-  }
-
-  const {data,error:loginError} =
-    await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
-
-  if(loginError){
-
-    error.textContent =
-      loginError.message;
-
-    return;
-  }
-
-  currentUser = data.user;
-
-  await loadApplication();
+  document.getElementById("loginError").textContent =
+    "Supabase library load nahi hui. Internet check karo.";
 
 }
 
 
-/* =========================
+/* ============================
+   SUPABASE CLIENT
+============================ */
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* ============================
+   VARIABLES
+============================ */
+
+let currentUser = null;
+
+let currentProfile = null;
+
+let roster = [];
+
+let subjects = [];
+
+let attendanceData = {};
+
+
+/* ============================
+   ELEMENTS
+============================ */
+
+const loginPage =
+  document.getElementById("loginPage");
+
+const app =
+  document.getElementById("app");
+
+const loginButton =
+  document.getElementById("loginButton");
+
+const logoutButton =
+  document.getElementById("logoutButton");
+
+
+/* ============================
+   LOGIN BUTTON
+============================ */
+
+loginButton.addEventListener(
+  "click",
+  login
+);
+
+
+/* ============================
+   ENTER KEY LOGIN
+============================ */
+
+document
+  .getElementById("password")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(event.key === "Enter"){
+        login();
+      }
+
+    }
+  );
+
+
+/* ============================
+   LOGIN
+============================ */
+
+async function login(){
+
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("password")
+      .value;
+
+  const error =
+    document
+      .getElementById("loginError");
+
+
+  error.textContent = "";
+
+
+  if(!email || !password){
+
+    error.textContent =
+      "Email aur password enter karo.";
+
+    return;
+
+  }
+
+
+  loginButton.disabled = true;
+
+  loginButton.textContent =
+    "Logging in...";
+
+
+  try{
+
+    const result =
+      await supabaseClient.auth.signInWithPassword({
+
+        email:email,
+
+        password:password
+
+      });
+
+
+    if(result.error){
+
+      error.textContent =
+        result.error.message;
+
+      return;
+
+    }
+
+
+    currentUser =
+      result.data.user;
+
+
+    await loadApplication();
+
+  }
+
+  catch(errorObject){
+
+    console.error(errorObject);
+
+    error.textContent =
+      "Login failed. Please try again.";
+
+  }
+
+  finally{
+
+    loginButton.disabled = false;
+
+    loginButton.textContent =
+      "Login";
+
+  }
+
+}
+
+
+/* ============================
    LOAD APPLICATION
-========================= */
+============================ */
 
 async function loadApplication(){
 
-  const {data:userData,error:userError} =
+  const {
+    data:userData,
+    error:userError
+  } =
     await supabaseClient.auth.getUser();
 
-  if(userError || !userData.user){
+
+  if(
+    userError ||
+    !userData ||
+    !userData.user
+  ){
 
     showLogin();
+
     return;
+
   }
 
-  currentUser = userData.user;
+
+  currentUser =
+    userData.user;
 
 
-  const {data:profile,error:profileError} =
+  const {
+    data:profile,
+    error:profileError
+  } =
     await supabaseClient
       .from("profiles")
       .select("*")
@@ -688,38 +930,62 @@ async function loadApplication(){
 
   if(profileError){
 
-    document.getElementById("loginError").textContent =
-      "Profile load nahi ho raha: " +
+    document
+      .getElementById("loginError")
+      .textContent =
+      "Profile load error: " +
       profileError.message;
 
+    await supabaseClient.auth.signOut();
+
     return;
+
   }
 
 
-  currentProfile = profile;
+  currentProfile =
+    profile;
 
 
-  document.getElementById("loginPage")
-    .classList.add("hidden");
-
-  document.getElementById("app")
-    .classList.remove("hidden");
+  loginPage
+    .classList
+    .add("hidden");
 
 
-  document.getElementById("headerUser").textContent =
-    `${profile.full_name} • ${profile.role}`;
+  app
+    .classList
+    .remove("hidden");
 
 
-  document.getElementById("profileName").textContent =
+  document
+    .getElementById("headerUser")
+    .textContent =
+    profile.full_name +
+    " • " +
+    profile.role;
+
+
+  document
+    .getElementById("profileName")
+    .textContent =
     profile.full_name || "-";
 
-  document.getElementById("profileUsername").textContent =
+
+  document
+    .getElementById("profileUsername")
+    .textContent =
     profile.username || "-";
 
-  document.getElementById("profileRoll").textContent =
+
+  document
+    .getElementById("profileRoll")
+    .textContent =
     profile.roll_no || "-";
 
-  document.getElementById("profileRole").textContent =
+
+  document
+    .getElementById("profileRole")
+    .textContent =
     profile.role || "-";
 
 
@@ -730,77 +996,109 @@ async function loadApplication(){
 
     document
       .getElementById("createAnnouncementNav")
-      .classList.remove("hidden");
+      .classList
+      .remove("hidden");
+
 
     document
       .getElementById("attendanceNav")
-      .classList.remove("hidden");
+      .classList
+      .remove("hidden");
 
   }
 
 
   await loadRoster();
+
   await loadAnnouncements();
+
   await loadSubjects();
 
 }
 
 
-/* =========================
-   LOGIN PAGE
-========================= */
+/* ============================
+   LOGOUT
+============================ */
+
+logoutButton.addEventListener(
+  "click",
+  async function(){
+
+    await supabaseClient.auth.signOut();
+
+    currentUser = null;
+
+    currentProfile = null;
+
+    showLogin();
+
+  }
+);
+
+
+/* ============================
+   SHOW LOGIN
+============================ */
 
 function showLogin(){
 
-  document
-    .getElementById("app")
-    .classList.add("hidden");
+  app.classList.add("hidden");
 
-  document
-    .getElementById("loginPage")
-    .classList.remove("hidden");
+  loginPage.classList.remove("hidden");
 
 }
 
 
-/* =========================
-   LOGOUT
-========================= */
+/* ============================
+   NAVIGATION
+============================ */
 
-async function logout(){
+document
+  .querySelectorAll(".nav-btn")
+  .forEach(function(button){
 
-  await supabaseClient.auth.signOut();
+    button.addEventListener(
+      "click",
+      function(){
 
-  currentUser = null;
-  currentProfile = null;
+        const page =
+          button.dataset.page;
 
-  showLogin();
+        showPage(page,button);
 
-}
+      }
+    );
 
+  });
 
-/* =========================
-   PAGE NAVIGATION
-========================= */
 
 function showPage(pageId,button){
 
   document
     .querySelectorAll(".page")
-    .forEach(page=>{
+    .forEach(function(page){
+
       page.classList.add("hidden");
+
     });
 
 
-  document
-    .getElementById(pageId)
-    .classList.remove("hidden");
+  const page =
+    document.getElementById(pageId);
+
+
+  if(page){
+    page.classList.remove("hidden");
+  }
 
 
   document
     .querySelectorAll(".nav-btn")
-    .forEach(btn=>{
+    .forEach(function(btn){
+
       btn.classList.remove("active");
+
     });
 
 
@@ -810,218 +1108,295 @@ function showPage(pageId,button){
 
 
   if(pageId === "attendance"){
+
     renderAttendance();
+
   }
 
 }
 
 
-/* =========================
-   ROSTER
-========================= */
+/* ============================
+   LOAD ROSTER
+============================ */
 
 async function loadRoster(){
 
-  const {data,error} =
+  const result =
     await supabaseClient
       .from("class_roster")
       .select("*")
       .order("roll_no");
 
 
-  if(error){
+  if(result.error){
 
-    console.error(error);
-
-    document.getElementById("rosterBody").innerHTML =
-      `<tr>
-        <td colspan="3">
-          Error loading roster
-        </td>
-      </tr>`;
+    console.error(
+      "Roster error:",
+      result.error
+    );
 
     return;
+
   }
 
 
-  roster = data || [];
+  roster =
+    result.data || [];
 
 
-  document.getElementById("studentCount")
-    .textContent = roster.length;
+  document
+    .getElementById("studentCount")
+    .textContent =
+    roster.length;
 
 
   const body =
-    document.getElementById("rosterBody");
+    document
+      .getElementById("rosterBody");
 
 
   body.innerHTML = "";
 
 
-  roster.forEach((student,index)=>{
+  roster.forEach(
+    function(student,index){
 
-    const row =
-      document.createElement("tr");
+      const row =
+        document.createElement("tr");
 
-    row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${escapeHTML(student.full_name)}</td>
-      <td>${escapeHTML(student.roll_no)}</td>
-    `;
 
-    body.appendChild(row);
+      row.innerHTML = `
 
-  });
+        <td>${index + 1}</td>
+
+        <td>
+          ${escapeHTML(student.full_name)}
+        </td>
+
+        <td>
+          ${escapeHTML(student.roll_no)}
+        </td>
+
+      `;
+
+
+      body.appendChild(row);
+
+    }
+  );
 
 }
 
 
-/* =========================
-   SUBJECTS
-========================= */
+/* ============================
+   LOAD SUBJECTS
+============================ */
 
 async function loadSubjects(){
 
-  const {data,error} =
+  const result =
     await supabaseClient
       .from("subjects")
       .select("*")
       .order("name");
 
 
-  if(error){
+  if(result.error){
 
-    console.error(error);
+    console.error(
+      "Subject error:",
+      result.error
+    );
+
     return;
+
   }
 
 
-  subjects = data || [];
+  subjects =
+    result.data || [];
 
 
   const select =
-    document.getElementById("attendanceSubject");
+    document
+      .getElementById(
+        "attendanceSubject"
+      );
 
 
   select.innerHTML =
-    `<option value="">Select Subject</option>`;
+    `<option value="">
+      Select Subject
+    </option>`;
 
 
-  subjects.forEach(subject=>{
+  subjects.forEach(
+    function(subject){
 
-    const option =
-      document.createElement("option");
+      const option =
+        document.createElement("option");
 
-    option.value = subject.id;
-    option.textContent = subject.name;
 
-    select.appendChild(option);
+      option.value =
+        subject.id;
 
-  });
+
+      option.textContent =
+        subject.name;
+
+
+      select.appendChild(option);
+
+    }
+  );
 
 }
 
 
-/* =========================
-   ANNOUNCEMENTS
-========================= */
+/* ============================
+   LOAD ANNOUNCEMENTS
+============================ */
 
 async function loadAnnouncements(){
 
-  const {data,error} =
+  const result =
     await supabaseClient
       .from("announcements")
       .select("*")
-      .order("created_at",{ascending:false});
+      .order(
+        "created_at",
+        {ascending:false}
+      );
 
 
-  if(error){
+  if(result.error){
 
-    console.error(error);
-
-    document.getElementById("announcementList").innerHTML =
-      "Announcements load nahi ho rahe.";
+    console.error(
+      "Announcement error:",
+      result.error
+    );
 
     return;
+
   }
 
 
-  const announcements = data || [];
+  const announcements =
+    result.data || [];
 
 
-  document.getElementById("announcementCount")
-    .textContent = announcements.length;
+  document
+    .getElementById("announcementCount")
+    .textContent =
+    announcements.length;
 
 
   const list =
-    document.getElementById("announcementList");
+    document
+      .getElementById(
+        "announcementList"
+      );
 
 
-  if(announcements.length === 0){
+  if(
+    announcements.length === 0
+  ){
 
     list.innerHTML =
       "<p>No announcements yet.</p>";
 
     return;
+
   }
 
 
   list.innerHTML = "";
 
 
-  announcements.forEach(item=>{
+  announcements.forEach(
+    function(item){
 
-    const div =
-      document.createElement("div");
-
-    div.className = "announcement";
-
-
-    const date =
-      item.created_at
-        ? new Date(item.created_at)
-            .toLocaleString()
-        : "";
+      const div =
+        document.createElement("div");
 
 
-    div.innerHTML = `
-      <h3>${escapeHTML(item.title)}</h3>
-      <p>${escapeHTML(item.body)}</p>
-      <small>${date}</small>
-    `;
+      div.className =
+        "announcement";
 
 
-    list.appendChild(div);
+      const date =
+        item.created_at
+          ? new Date(
+              item.created_at
+            ).toLocaleString()
+          : "";
 
-  });
+
+      div.innerHTML = `
+
+        <h3>
+          ${escapeHTML(item.title)}
+        </h3>
+
+        <p>
+          ${escapeHTML(item.body)}
+        </p>
+
+        <small>
+          ${date}
+        </small>
+
+      `;
+
+
+      list.appendChild(div);
+
+    }
+  );
 
 }
 
 
-/* =========================
+/* ============================
    CREATE ANNOUNCEMENT
-========================= */
+============================ */
+
+document
+  .getElementById(
+    "publishAnnouncementButton"
+  )
+  .addEventListener(
+    "click",
+    createAnnouncement
+  );
+
 
 async function createAnnouncement(){
 
   const title =
     document
-      .getElementById("announcementTitle")
+      .getElementById(
+        "announcementTitle"
+      )
       .value
       .trim();
 
 
   const body =
     document
-      .getElementById("announcementBody")
+      .getElementById(
+        "announcementBody"
+      )
       .value
       .trim();
 
 
   const message =
-    document.getElementById(
-      "announcementMessage"
-    );
+    document
+      .getElementById(
+        "announcementMessage"
+      );
 
 
   message.innerHTML = "";
@@ -1035,12 +1410,15 @@ async function createAnnouncement(){
       </div>`;
 
     return;
+
   }
 
 
   if(
     !currentProfile ||
-    !["admin","cr"].includes(currentProfile.role)
+    !["admin","cr"].includes(
+      currentProfile.role
+    )
   ){
 
     message.innerHTML =
@@ -1049,44 +1427,57 @@ async function createAnnouncement(){
       </div>`;
 
     return;
+
   }
 
 
-  const {error} =
+  const result =
     await supabaseClient
       .from("announcements")
       .insert({
-        author_id:currentUser.id,
+
+        author_id:
+          currentUser.id,
+
         title:title,
+
         body:body
+
       });
 
 
-  if(error){
+  if(result.error){
 
     message.innerHTML =
       `<div class="message danger">
-        ${escapeHTML(error.message)}
+        ${escapeHTML(
+          result.error.message
+        )}
       </div>`;
 
     return;
+
   }
 
 
   message.innerHTML =
-    `<div class="message success">
+    `<div class="message success-box">
       Announcement published successfully.
     </div>`;
 
 
-  document.getElementById(
-    "announcementTitle"
-  ).value = "";
+  document
+    .getElementById(
+      "announcementTitle"
+    )
+    .value = "";
 
 
-  document.getElementById(
-    "announcementBody"
-  ).value = "";
+  document
+    .getElementById(
+      "announcementBody"
+    )
+    .value = "";
 
 
   await loadAnnouncements();
@@ -1094,225 +1485,92 @@ async function createAnnouncement(){
 }
 
 
-/* =========================
-   ATTENDANCE RENDER
-========================= */
+/* ============================
+   ATTENDANCE
+============================ */
 
 function renderAttendance(){
 
   const list =
-    document.getElementById(
-      "attendanceList"
-    );
-
-
-  if(roster.length === 0){
-
-    list.innerHTML =
-      "<p>Roster loading...</p>";
-
-    return;
-  }
+    document
+      .getElementById(
+        "attendanceList"
+      );
 
 
   list.innerHTML = "";
 
 
-  roster.forEach(student=>{
+  roster.forEach(
+    function(student){
 
-    if(!attendanceData[student.id]){
-      attendanceData[student.id] = "";
-    }
-
-
-    const row =
-      document.createElement("div");
-
-    row.className =
-      "attendance-row";
-
-
-    row.innerHTML = `
-
-      <div class="student-info">
-
-        <div class="student-name">
-          ${escapeHTML(student.full_name)}
-        </div>
-
-        <div class="roll">
-          ${escapeHTML(student.roll_no)}
-        </div>
-
-      </div>
-
-
-      <div class="status-buttons">
-
-        <button
-          class="status-btn present ${
-            attendanceData[student.id] === "present"
-              ? "selected"
-              : ""
-          }"
-          onclick="setAttendance(${student.id},'present')">
-          Present
-        </button>
-
-
-        <button
-          class="status-btn absent ${
-            attendanceData[student.id] === "absent"
-              ? "selected"
-              : ""
-          }"
-          onclick="setAttendance(${student.id},'absent')">
-          Absent
-        </button>
-
-      </div>
-
-    `;
-
-
-    list.appendChild(row);
-
-  });
-
-}
-
-
-/* =========================
-   SET ATTENDANCE
-========================= */
-
-function setAttendance(studentId,status){
-
-  attendanceData[studentId] = status;
-
-  renderAttendance();
-
-}
-
-
-/* =========================
-   SAVE ATTENDANCE
-========================= */
-
-async function saveAttendance(){
-
-  const subjectId =
-    document.getElementById(
-      "attendanceSubject"
-    ).value;
-
-
-  const date =
-    document.getElementById(
-      "attendanceDate"
-    ).value;
-
-
-  const message =
-    document.getElementById(
-      "attendanceMessage"
-    );
-
-
-  message.innerHTML = "";
-
-
-  if(!subjectId){
-
-    message.innerHTML =
-      `<div class="message danger">
-        Please select a subject.
-      </div>`;
-
-    return;
-  }
-
-
-  if(!date){
-
-    message.innerHTML =
-      `<div class="message danger">
-        Please select attendance date.
-      </div>`;
-
-    return;
-  }
-
-
-  if(
-    !currentProfile ||
-    !["admin","cr"].includes(currentProfile.role)
-  ){
-
-    message.innerHTML =
-      `<div class="message danger">
-        Sirf Admin/CR attendance mark kar sakte hain.
-      </div>`;
-
-    return;
-  }
-
-
-  const incomplete =
-    roster.filter(
-      student =>
+      if(
         !attendanceData[student.id]
-    );
+      ){
+
+        attendanceData[student.id] = "";
+
+      }
 
 
-  if(incomplete.length > 0){
-
-    message.innerHTML =
-      `<div class="message danger">
-        Sabhi ${roster.length} students ka Present/Absent mark karo.
-      </div>`;
-
-    return;
-  }
+      const row =
+        document.createElement("div");
 
 
-  const {error:deleteError} =
-    await supabaseClient
-      .from("attendance")
-      .delete()
-      .eq("subject_id",subjectId)
-      .eq("attendance_date",date);
+      row.className =
+        "attendance-row";
 
 
-  if(deleteError){
+      row.innerHTML = `
 
-    message.innerHTML =
-      `<div class="message danger">
-        Old attendance delete nahi hui:
-        ${escapeHTML(deleteError.message)}
-      </div>`;
+        <div class="student-info">
 
-    return;
-  }
+          <div class="student-name">
+            ${escapeHTML(
+              student.full_name
+            )}
+          </div>
 
+          <div class="roll">
+            ${escapeHTML(
+              student.roll_no
+            )}
+          </div>
 
-  const rows =
-    roster.map(student=>({
-
-      subject_id:subjectId,
-
-      roster_student_id:Number(student.id),
-
-      attendance_date:date,
-
-      status:attendanceData[student.id],
-
-      marked_by:currentUser.id
-
-    }));
+        </div>
 
 
-  const {error:insertError} =
-    await supabaseClient
-      .from("attendance")
-      .insert(rows)
+        <div class="status-buttons">
+
+          <button
+            type="button"
+            class="status-btn present
+            ${
+              attendanceData[student.id]
+              === "present"
+              ? "selected"
+              : ""
+            }"
+            onclick="
+              setAttendance(
+                ${student.id},
+                'present'
+              )
+            "
+          >
+            Present
+          </button>
+
+
+          <button
+            type="button"
+            class="status-btn absent
+            ${
+              attendanceData[student.id]
+              === "absent"
+              ? "selected"
+              : ""
+            }"
+            onclick="
+              setAttendance(
+            
