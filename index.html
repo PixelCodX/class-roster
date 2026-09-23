@@ -100,25 +100,66 @@ main{padding:12px}
 
 <!-- DASHBOARD -->
 <section id="dashboard">
+
 <div class="card">
-<h2>Welcome 👋</h2>
-<p>BVSA Semester 1 Class Management System</p>
+  <h2>Welcome 👋</h2>
+  <p>BVSA Semester 1 Class Management System</p>
 </div>
 
 <div class="grid">
-<div class="stat">
-<h2 id="studentCount">0</h2>
-<p>Total Students</p>
+  <div class="stat">
+    <h2 id="studentCount">0</h2>
+    <p>Total Students</p>
+  </div>
+
+  <div class="stat">
+    <h2>6</h2>
+    <p>Subjects</p>
+  </div>
+
+  <div class="stat">
+    <h2 id="announcementCount">0</h2>
+    <p>Announcements</p>
+  </div>
 </div>
-<div class="stat">
-<h2>6</h2>
-<p>Subjects</p>
+
+<div class="card">
+  <h2>📊 Today's Attendance</h2>
+
+  <div class="grid">
+
+    <div class="stat">
+      <h2 id="dashPresent">0</h2>
+      <p>Present</p>
+    </div>
+
+    <div class="stat">
+      <h2 id="dashAbsent">0</h2>
+      <p>Absent</p>
+    </div>
+
+    <div class="stat">
+      <h2 id="dashPercentage">0%</h2>
+      <p>Attendance</p>
+    </div>
+
+  </div>
 </div>
-<div class="stat">
-<h2 id="announcementCount">0</h2>
-<p>Announcements</p>
+
+<div class="card">
+  <h2>📚 Subject-wise Attendance</h2>
+  <div id="subjectAttendance">
+    <p>Attendance data will appear here.</p>
+  </div>
 </div>
+
+<div class="card">
+  <h2>📅 Recent Attendance</h2>
+  <div id="attendanceHistory">
+    <p>No attendance records yet.</p>
+  </div>
 </div>
+
 </section>
 
 <!-- ROSTER -->
