@@ -5,17 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BVSA Class Roster</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+*{
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
 
 body{
+  margin:0;
   background:#f4f7fb;
   color:#172033;
 }
 
-.hidden{display:none!important}
+.hidden{
+  display:none!important;
+}
 
 button{
   cursor:pointer;
@@ -25,38 +29,36 @@ input,select,textarea{
   width:100%;
   padding:13px;
   margin:7px 0 15px;
-  border:1px solid #d0d5dd;
-  border-radius:10px;
+  border:1px solid #ccc;
+  border-radius:9px;
   font-size:15px;
 }
 
 label{
-  font-size:14px;
   font-weight:bold;
+  font-size:14px;
 }
 
 .primary{
   width:100%;
   padding:13px;
   border:0;
-  border-radius:10px;
+  border-radius:9px;
   background:#2563eb;
   color:white;
   font-size:16px;
   font-weight:bold;
 }
 
-.primary:active{
-  transform:scale(.98);
+.primary:disabled{
+  opacity:.6;
 }
-
-/* LOGIN */
 
 #loginPage{
   min-height:100vh;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   padding:20px;
   background:linear-gradient(135deg,#2563eb,#7c3aed);
 }
@@ -67,12 +69,12 @@ label{
   background:white;
   padding:30px;
   border-radius:20px;
-  box-shadow:0 20px 50px rgba(0,0,0,.2);
+  box-shadow:0 15px 40px #0003;
 }
 
 .login-box h1{
   text-align:center;
-  margin-bottom:8px;
+  margin:0 0 8px;
 }
 
 .login-box p{
@@ -81,19 +83,12 @@ label{
   margin-bottom:25px;
 }
 
-.error{
+#error{
   color:#dc2626;
-  margin-top:12px;
   text-align:center;
-}
-
-.success{
-  color:#15803d;
   margin-top:12px;
-  text-align:center;
+  font-size:14px;
 }
-
-/* HEADER */
 
 header{
   background:linear-gradient(135deg,#2563eb,#4f46e5);
@@ -101,7 +96,7 @@ header{
   padding:18px;
 }
 
-.header-inner{
+.header{
   max-width:1100px;
   margin:auto;
   display:flex;
@@ -109,24 +104,14 @@ header{
   align-items:center;
 }
 
-header h1{
-  font-size:21px;
-}
-
-header small{
-  opacity:.9;
-}
-
 .logout{
-  border:0;
   padding:9px 14px;
+  border:0;
   border-radius:8px;
   background:white;
   color:#2563eb;
   font-weight:bold;
 }
-
-/* NAV */
 
 nav{
   background:white;
@@ -134,27 +119,25 @@ nav{
   overflow-x:auto;
 }
 
-.nav-inner{
+.nav{
   max-width:1100px;
   margin:auto;
   display:flex;
 }
 
-.nav-btn{
+.nav button{
+  padding:15px;
   border:0;
   background:white;
-  padding:15px;
   color:#667085;
   font-weight:bold;
   white-space:nowrap;
 }
 
-.nav-btn.active{
+.nav button.active{
   color:#2563eb;
   border-bottom:3px solid #2563eb;
 }
-
-/* MAIN */
 
 main{
   max-width:1100px;
@@ -164,41 +147,26 @@ main{
 
 .card{
   background:white;
-  border-radius:15px;
   padding:20px;
+  border-radius:15px;
   margin-bottom:18px;
-  box-shadow:0 3px 15px rgba(0,0,0,.06);
-}
-
-.card h2{
-  margin-bottom:15px;
+  box-shadow:0 3px 15px #0000000d;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:15px;
 }
 
 .stat{
-  padding:20px;
-  border-radius:15px;
   background:#eff6ff;
+  padding:20px;
+  border-radius:12px;
 }
 
-.stat h3{
-  font-size:28px;
+.stat h2{
   color:#2563eb;
-}
-
-.stat p{
-  color:#667085;
-}
-
-/* TABLE */
-
-.table-wrap{
-  overflow-x:auto;
 }
 
 table{
@@ -212,61 +180,35 @@ th,td{
   text-align:left;
 }
 
-th{
-  background:#f8fafc;
+.table{
+  overflow-x:auto;
 }
-
-/* ANNOUNCEMENT */
 
 .announcement{
-  border-left:4px solid #2563eb;
   padding:15px;
-  background:#f8fafc;
-  border-radius:8px;
   margin-bottom:12px;
+  background:#f8fafc;
+  border-left:4px solid #2563eb;
+  border-radius:7px;
 }
 
-.announcement h3{
-  margin-bottom:6px;
-}
-
-.announcement small{
-  color:#667085;
-}
-
-/* ATTENDANCE */
-
-.attendance-row{
+.attendance{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
-  padding:12px;
+  padding:12px 0;
   border-bottom:1px solid #eee;
 }
 
-.student-info{
-  flex:1;
-}
-
-.student-name{
-  font-weight:bold;
-}
-
-.roll{
-  color:#667085;
-  font-size:13px;
-}
-
-.status-buttons{
+.att-buttons{
   display:flex;
-  gap:7px;
+  gap:6px;
 }
 
-.status-btn{
-  border:1px solid #ddd;
+.att-buttons button{
   padding:8px 12px;
-  border-radius:8px;
+  border:1px solid #ddd;
+  border-radius:7px;
   background:white;
   font-weight:bold;
 }
@@ -281,16 +223,16 @@ th{
   color:white;
 }
 
-.save-btn{
+.save{
   width:100%;
   padding:14px;
-  margin-top:20px;
   border:0;
-  border-radius:10px;
+  border-radius:9px;
   background:#16a34a;
   color:white;
-  font-size:16px;
   font-weight:bold;
+  font-size:16px;
+  margin-top:20px;
 }
 
 .message{
@@ -300,37 +242,32 @@ th{
   background:#eff6ff;
 }
 
+.success{
+  background:#dcfce7;
+  color:#15803d;
+}
+
 .danger{
   background:#fee2e2;
   color:#b91c1c;
 }
 
-.success-box{
-  background:#dcfce7;
-  color:#15803d;
-}
-
 @media(max-width:600px){
-
   main{
     padding:12px;
   }
 
-  .header-inner{
+  .attendance{
+    flex-direction:column;
     align-items:flex-start;
     gap:10px;
   }
 
-  .attendance-row{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .status-buttons{
+  .att-buttons{
     width:100%;
   }
 
-  .status-btn{
+  .att-buttons button{
     flex:1;
   }
 }
@@ -341,121 +278,100 @@ th{
 
 <!-- LOGIN -->
 
-<section id="loginPage">
+<div id="loginPage">
 
-<div class="login-box">
+  <div class="login-box">
 
-<h1>BVSA Class Roster</h1>
+    <h1>BVSA Class Roster</h1>
 
-<p>RKMVERI Ranchi • Semester 1</p>
+    <p>RKMVERI Ranchi • Semester 1</p>
 
-<label>Email</label>
+    <label>Email</label>
+    <input id="email" type="email"
+           placeholder="Enter your email">
 
-<input
-  id="email"
-  type="email"
-  placeholder="Enter your email"
->
+    <label>Password</label>
+    <input id="password" type="password"
+           placeholder="Enter your password">
 
-<label>Password</label>
+    <button id="loginBtn"
+            class="primary"
+            type="button">
+      Login
+    </button>
 
-<input
-  id="password"
-  type="password"
-  placeholder="Enter your password"
->
+    <div id="error"></div>
 
-<button
-  id="loginButton"
-  class="primary"
-  type="button"
->
-Login
-</button>
-
-<div id="loginError" class="error"></div>
+  </div>
 
 </div>
-
-</section>
 
 
 <!-- APP -->
 
-<section id="app" class="hidden">
+<div id="app" class="hidden">
 
 <header>
 
-<div class="header-inner">
+  <div class="header">
 
-<div>
+    <div>
+      <h2 style="margin:0">
+        BVSA Class Roster
+      </h2>
 
-<h1>BVSA Class Roster</h1>
+      <small id="userInfo"></small>
+    </div>
 
-<small id="headerUser"></small>
+    <button
+      class="logout"
+      onclick="logout()">
+      Logout
+    </button>
 
-</div>
-
-<button
-  class="logout"
-  id="logoutButton"
-  type="button"
->
-Logout
-</button>
-
-</div>
+  </div>
 
 </header>
 
 
 <nav>
 
-<div class="nav-inner">
+<div class="nav">
 
-<button
-  class="nav-btn active"
-  data-page="dashboard"
->
-Dashboard
-</button>
+  <button
+    class="active"
+    onclick="page('dashboard',this)">
+    Dashboard
+  </button>
 
-<button
-  class="nav-btn"
-  data-page="roster"
->
-Class Roster
-</button>
+  <button
+    onclick="page('roster',this)">
+    Class Roster
+  </button>
 
-<button
-  class="nav-btn"
-  data-page="announcements"
->
-Announcements
-</button>
+  <button
+    onclick="page('announcements',this)">
+    Announcements
+  </button>
 
-<button
-  id="createAnnouncementNav"
-  class="nav-btn hidden"
-  data-page="createAnnouncement"
->
-Create Announcement
-</button>
+  <button
+    id="createNav"
+    class="hidden"
+    onclick="page('create',this)">
+    Create Announcement
+  </button>
 
-<button
-  id="attendanceNav"
-  class="nav-btn hidden"
-  data-page="attendance"
->
-Attendance
-</button>
+  <button
+    id="attendanceNav"
+    class="hidden"
+    onclick="page('attendance',this)">
+    Attendance
+  </button>
 
-<button
-  class="nav-btn"
-  data-page="profile"
->
-Profile
-</button>
+  <button
+    onclick="page('profile',this)">
+    Profile
+  </button>
 
 </div>
 
@@ -466,7 +382,7 @@ Profile
 
 <!-- DASHBOARD -->
 
-<section id="dashboard" class="page">
+<section id="dashboard">
 
 <div class="card">
 
@@ -481,27 +397,18 @@ BVSA Semester 1 Class Management System
 <div class="grid">
 
 <div class="stat">
-
-<h3 id="studentCount">0</h3>
-
+<h2 id="studentCount">0</h2>
 <p>Total Students</p>
-
 </div>
 
 <div class="stat">
-
-<h3>6</h3>
-
+<h2>6</h2>
 <p>Subjects</p>
-
 </div>
 
 <div class="stat">
-
-<h3 id="announcementCount">0</h3>
-
+<h2 id="announcementCount">0</h2>
 <p>Announcements</p>
-
 </div>
 
 </div>
@@ -511,27 +418,22 @@ BVSA Semester 1 Class Management System
 
 <!-- ROSTER -->
 
-<section
-  id="roster"
-  class="page hidden"
->
+<section id="roster" class="hidden">
 
 <div class="card">
 
 <h2>Class Roster</h2>
 
-<div class="table-wrap">
+<div class="table">
 
 <table>
 
 <thead>
-
 <tr>
 <th>#</th>
 <th>Name</th>
 <th>Roll No.</th>
 </tr>
-
 </thead>
 
 <tbody id="rosterBody"></tbody>
@@ -547,10 +449,7 @@ BVSA Semester 1 Class Management System
 
 <!-- ANNOUNCEMENTS -->
 
-<section
-  id="announcements"
-  class="page hidden"
->
+<section id="announcements" class="hidden">
 
 <div class="card">
 
@@ -565,12 +464,9 @@ Loading...
 </section>
 
 
-<!-- CREATE ANNOUNCEMENT -->
+<!-- CREATE -->
 
-<section
-  id="createAnnouncement"
-  class="page hidden"
->
+<section id="create" class="hidden">
 
 <div class="card">
 
@@ -579,27 +475,24 @@ Loading...
 <label>Title</label>
 
 <input
-  id="announcementTitle"
-  placeholder="Announcement title"
->
+  id="title"
+  placeholder="Announcement title">
 
 <label>Message</label>
 
 <textarea
-  id="announcementBody"
+  id="body"
   rows="6"
-  placeholder="Write announcement..."
-></textarea>
+  placeholder="Write announcement">
+</textarea>
 
 <button
   class="primary"
-  id="publishAnnouncementButton"
-  type="button"
->
-Publish Announcement
+  onclick="createAnnouncement()">
+  Publish Announcement
 </button>
 
-<div id="announcementMessage"></div>
+<div id="createMessage"></div>
 
 </div>
 
@@ -608,10 +501,7 @@ Publish Announcement
 
 <!-- ATTENDANCE -->
 
-<section
-  id="attendance"
-  class="page hidden"
->
+<section id="attendance" class="hidden">
 
 <div class="card">
 
@@ -619,33 +509,24 @@ Publish Announcement
 
 <label>Subject</label>
 
-<select id="attendanceSubject">
-
-<option value="">
-Select Subject
-</option>
-
+<select id="subject">
+<option value="">Select Subject</option>
 </select>
-
 
 <label>Date</label>
 
 <input
-  id="attendanceDate"
-  type="date"
->
-
+  id="date"
+  type="date">
 
 <div id="attendanceMessage"></div>
 
 <div id="attendanceList"></div>
 
 <button
-  class="save-btn"
-  id="saveAttendanceButton"
-  type="button"
->
-Save Attendance
+  class="save"
+  onclick="saveAttendance()">
+  Save Attendance
 </button>
 
 </div>
@@ -655,38 +536,31 @@ Save Attendance
 
 <!-- PROFILE -->
 
-<section
-  id="profile"
-  class="page hidden"
->
+<section id="profile" class="hidden">
 
 <div class="card">
 
 <h2>My Profile</h2>
 
-<div class="grid">
+<p>
+<b>Name:</b>
+<span id="pName"></span>
+</p>
 
-<div>
-<b>Full Name</b>
-<p id="profileName">-</p>
-</div>
+<p>
+<b>Username:</b>
+<span id="pUsername"></span>
+</p>
 
-<div>
-<b>Username</b>
-<p id="profileUsername">-</p>
-</div>
+<p>
+<b>Roll No:</b>
+<span id="pRoll"></span>
+</p>
 
-<div>
-<b>Roll No.</b>
-<p id="profileRoll">-</p>
-</div>
-
-<div>
-<b>Role</b>
-<p id="profileRole">-</p>
-</div>
-
-</div>
+<p>
+<b>Role:</b>
+<span id="pRole"></span>
+</p>
 
 </div>
 
@@ -694,110 +568,128 @@ Save Attendance
 
 </main>
 
-</section>
+</div>
 
 
 <script>
 
-/* ============================
-   SUPABASE CONFIG
-============================ */
+/* =================================
+   SUPABASE
+================================= */
 
-const SUPABASE_URL =
+const URL =
 "https://cxhhewyegzhfocjmjfwp.supabase.co";
 
-const SUPABASE_KEY =
+const KEY =
 "sb_publishable_dBK7lW2zeXJ6PldPAU7jbA_Jpl3oOLN";
 
+let accessToken = null;
+let currentUser = null;
+let profile = null;
 
-/* ============================
-   CHECK SUPABASE LIBRARY
-============================ */
+let roster = [];
+let subjects = [];
+let attendanceData = {};
 
-if(
-  typeof window.supabase === "undefined"
+
+/* =================================
+   SUPABASE REQUEST
+================================= */
+
+async function request(
+  path,
+  options={}
 ){
 
-  document.getElementById("loginError").textContent =
-    "Supabase library load nahi hui. Internet check karo.";
+  options.headers = {
+
+    "apikey":KEY,
+
+    "Content-Type":
+      "application/json",
+
+    ...(
+      options.headers || {}
+    )
+
+  };
+
+
+  if(accessToken){
+
+    options.headers[
+      "Authorization"
+    ] =
+      "Bearer " +
+      accessToken;
+
+  }
+
+
+  const response =
+    await fetch(
+      URL + path,
+      options
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data = null;
+
+  try{
+    data = text ? JSON.parse(text) : null;
+  }
+  catch{
+    data = text;
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data?.message ||
+      data?.msg ||
+      data?.error_description ||
+      text ||
+      "Request failed"
+    );
+
+  }
+
+
+  return data;
 
 }
 
 
-/* ============================
-   SUPABASE CLIENT
-============================ */
+/* =================================
+   LOGIN
+================================= */
 
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
+document
+  .getElementById("loginBtn")
+  .addEventListener(
+    "click",
+    login
   );
 
-
-/* ============================
-   VARIABLES
-============================ */
-
-let currentUser = null;
-
-let currentProfile = null;
-
-let roster = [];
-
-let subjects = [];
-
-let attendanceData = {};
-
-
-/* ============================
-   ELEMENTS
-============================ */
-
-const loginPage =
-  document.getElementById("loginPage");
-
-const app =
-  document.getElementById("app");
-
-const loginButton =
-  document.getElementById("loginButton");
-
-const logoutButton =
-  document.getElementById("logoutButton");
-
-
-/* ============================
-   LOGIN BUTTON
-============================ */
-
-loginButton.addEventListener(
-  "click",
-  login
-);
-
-
-/* ============================
-   ENTER KEY LOGIN
-============================ */
 
 document
   .getElementById("password")
   .addEventListener(
     "keydown",
-    function(event){
+    function(e){
 
-      if(event.key === "Enter"){
+      if(e.key === "Enter"){
         login();
       }
 
     }
   );
 
-
-/* ============================
-   LOGIN
-============================ */
 
 async function login(){
 
@@ -812,9 +704,10 @@ async function login(){
       .getElementById("password")
       .value;
 
+
   const error =
     document
-      .getElementById("loginError");
+      .getElementById("error");
 
 
   error.textContent = "";
@@ -830,319 +723,208 @@ async function login(){
   }
 
 
-  loginButton.disabled = true;
+  const btn =
+    document
+      .getElementById("loginBtn");
 
-  loginButton.textContent =
+
+  btn.disabled = true;
+
+  btn.textContent =
     "Logging in...";
 
 
   try{
 
-    const result =
-      await supabaseClient.auth.signInWithPassword({
+    const data =
+      await request(
+        "/auth/v1/token?grant_type=password",
+        {
+          method:"POST",
 
-        email:email,
+          body:JSON.stringify({
+            email:email,
+            password:password
+          })
+        }
+      );
 
-        password:password
 
-      });
-
-
-    if(result.error){
-
-      error.textContent =
-        result.error.message;
-
-      return;
-
-    }
+    accessToken =
+      data.access_token;
 
 
     currentUser =
-      result.data.user;
+      data.user;
 
 
-    await loadApplication();
+    localStorage.setItem(
+      "bvsa_token",
+      accessToken
+    );
+
+    localStorage.setItem(
+      "bvsa_user",
+      JSON.stringify(currentUser)
+    );
+
+
+    await loadApp();
 
   }
 
-  catch(errorObject){
+  catch(e){
 
-    console.error(errorObject);
+    console.error(e);
 
     error.textContent =
-      "Login failed. Please try again.";
+      e.message ||
+      "Login failed.";
 
   }
 
   finally{
 
-    loginButton.disabled = false;
+    btn.disabled = false;
 
-    loginButton.textContent =
-      "Login";
+    btn.textContent = "Login";
 
   }
 
 }
 
 
-/* ============================
-   LOAD APPLICATION
-============================ */
+/* =================================
+   LOAD APP
+================================= */
 
-async function loadApplication(){
+async function loadApp(){
 
-  const {
-    data:userData,
-    error:userError
-  } =
-    await supabaseClient.auth.getUser();
+  try{
 
-
-  if(
-    userError ||
-    !userData ||
-    !userData.user
-  ){
-
-    showLogin();
-
-    return;
-
-  }
+    const profiles =
+      await request(
+        "/rest/v1/profiles?id=eq." +
+        encodeURIComponent(
+          currentUser.id
+        ) +
+        "&select=*"
+      );
 
 
-  currentUser =
-    userData.user;
+    if(
+      !profiles ||
+      profiles.length === 0
+    ){
+
+      throw new Error(
+        "Profile nahi mila."
+      );
+
+    }
 
 
-  const {
-    data:profile,
-    error:profileError
-  } =
-    await supabaseClient
-      .from("profiles")
-      .select("*")
-      .eq("id",currentUser.id)
-      .single();
+    profile =
+      profiles[0];
 
-
-  if(profileError){
 
     document
-      .getElementById("loginError")
+      .getElementById("loginPage")
+      .classList
+      .add("hidden");
+
+
+    document
+      .getElementById("app")
+      .classList
+      .remove("hidden");
+
+
+    document
+      .getElementById("userInfo")
       .textContent =
-      "Profile load error: " +
-      profileError.message;
-
-    await supabaseClient.auth.signOut();
-
-    return;
-
-  }
-
-
-  currentProfile =
-    profile;
-
-
-  loginPage
-    .classList
-    .add("hidden");
-
-
-  app
-    .classList
-    .remove("hidden");
-
-
-  document
-    .getElementById("headerUser")
-    .textContent =
-    profile.full_name +
-    " • " +
-    profile.role;
-
-
-  document
-    .getElementById("profileName")
-    .textContent =
-    profile.full_name || "-";
-
-
-  document
-    .getElementById("profileUsername")
-    .textContent =
-    profile.username || "-";
-
-
-  document
-    .getElementById("profileRoll")
-    .textContent =
-    profile.roll_no || "-";
-
-
-  document
-    .getElementById("profileRole")
-    .textContent =
-    profile.role || "-";
-
-
-  if(
-    profile.role === "admin" ||
-    profile.role === "cr"
-  ){
-
-    document
-      .getElementById("createAnnouncementNav")
-      .classList
-      .remove("hidden");
+      profile.full_name +
+      " • " +
+      profile.role;
 
 
     document
-      .getElementById("attendanceNav")
-      .classList
-      .remove("hidden");
+      .getElementById("pName")
+      .textContent =
+      profile.full_name || "-";
+
+
+    document
+      .getElementById("pUsername")
+      .textContent =
+      profile.username || "-";
+
+
+    document
+      .getElementById("pRoll")
+      .textContent =
+      profile.roll_no || "-";
+
+
+    document
+      .getElementById("pRole")
+      .textContent =
+      profile.role || "-";
+
+
+    if(
+      profile.role === "admin" ||
+      profile.role === "cr"
+    ){
+
+      document
+        .getElementById("createNav")
+        .classList
+        .remove("hidden");
+
+
+      document
+        .getElementById("attendanceNav")
+        .classList
+        .remove("hidden");
+
+    }
+
+
+    await loadRoster();
+
+    await loadSubjects();
+
+    await loadAnnouncements();
 
   }
 
+  catch(e){
 
-  await loadRoster();
+    console.error(e);
 
-  await loadAnnouncements();
+    document
+      .getElementById("error")
+      .textContent =
+      e.message;
 
-  await loadSubjects();
-
-}
-
-
-/* ============================
-   LOGOUT
-============================ */
-
-logoutButton.addEventListener(
-  "click",
-  async function(){
-
-    await supabaseClient.auth.signOut();
-
-    currentUser = null;
-
-    currentProfile = null;
-
-    showLogin();
-
-  }
-);
-
-
-/* ============================
-   SHOW LOGIN
-============================ */
-
-function showLogin(){
-
-  app.classList.add("hidden");
-
-  loginPage.classList.remove("hidden");
-
-}
-
-
-/* ============================
-   NAVIGATION
-============================ */
-
-document
-  .querySelectorAll(".nav-btn")
-  .forEach(function(button){
-
-    button.addEventListener(
-      "click",
-      function(){
-
-        const page =
-          button.dataset.page;
-
-        showPage(page,button);
-
-      }
-    );
-
-  });
-
-
-function showPage(pageId,button){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(function(page){
-
-      page.classList.add("hidden");
-
-    });
-
-
-  const page =
-    document.getElementById(pageId);
-
-
-  if(page){
-    page.classList.remove("hidden");
-  }
-
-
-  document
-    .querySelectorAll(".nav-btn")
-    .forEach(function(btn){
-
-      btn.classList.remove("active");
-
-    });
-
-
-  if(button){
-    button.classList.add("active");
-  }
-
-
-  if(pageId === "attendance"){
-
-    renderAttendance();
+    logout();
 
   }
 
 }
 
 
-/* ============================
-   LOAD ROSTER
-============================ */
+/* =================================
+   ROSTER
+================================= */
 
 async function loadRoster(){
 
-  const result =
-    await supabaseClient
-      .from("class_roster")
-      .select("*")
-      .order("roll_no");
-
-
-  if(result.error){
-
-    console.error(
-      "Roster error:",
-      result.error
-    );
-
-    return;
-
-  }
-
-
   roster =
-    result.data || [];
+    await request(
+      "/rest/v1/class_roster?select=*&order=roll_no.asc"
+    );
 
 
   document
@@ -1160,15 +942,13 @@ async function loadRoster(){
 
 
   roster.forEach(
-    function(student,index){
+    (student,i)=>{
 
-      const row =
-        document.createElement("tr");
+      body.innerHTML += `
 
+      <tr>
 
-      row.innerHTML = `
-
-        <td>${index + 1}</td>
+        <td>${i+1}</td>
 
         <td>
           ${escapeHTML(student.full_name)}
@@ -1178,10 +958,9 @@ async function loadRoster(){
           ${escapeHTML(student.roll_no)}
         </td>
 
+      </tr>
+
       `;
-
-
-      body.appendChild(row);
 
     }
   );
@@ -1189,40 +968,21 @@ async function loadRoster(){
 }
 
 
-/* ============================
-   LOAD SUBJECTS
-============================ */
+/* =================================
+   SUBJECTS
+================================= */
 
 async function loadSubjects(){
 
-  const result =
-    await supabaseClient
-      .from("subjects")
-      .select("*")
-      .order("name");
-
-
-  if(result.error){
-
-    console.error(
-      "Subject error:",
-      result.error
-    );
-
-    return;
-
-  }
-
-
   subjects =
-    result.data || [];
+    await request(
+      "/rest/v1/subjects?select=*&order=name.asc"
+    );
 
 
   const select =
     document
-      .getElementById(
-        "attendanceSubject"
-      );
+      .getElementById("subject");
 
 
   select.innerHTML =
@@ -1232,21 +992,15 @@ async function loadSubjects(){
 
 
   subjects.forEach(
-    function(subject){
+    s=>{
 
-      const option =
-        document.createElement("option");
+      select.innerHTML += `
 
+      <option value="${s.id}">
+        ${escapeHTML(s.name)}
+      </option>
 
-      option.value =
-        subject.id;
-
-
-      option.textContent =
-        subject.name;
-
-
-      select.appendChild(option);
+      `;
 
     }
   );
@@ -1254,42 +1008,22 @@ async function loadSubjects(){
 }
 
 
-/* ============================
-   LOAD ANNOUNCEMENTS
-============================ */
+/* =================================
+   ANNOUNCEMENTS
+================================= */
 
 async function loadAnnouncements(){
 
-  const result =
-    await supabaseClient
-      .from("announcements")
-      .select("*")
-      .order(
-        "created_at",
-        {ascending:false}
-      );
-
-
-  if(result.error){
-
-    console.error(
-      "Announcement error:",
-      result.error
+  const data =
+    await request(
+      "/rest/v1/announcements?select=*&order=created_at.desc"
     );
-
-    return;
-
-  }
-
-
-  const announcements =
-    result.data || [];
 
 
   document
     .getElementById("announcementCount")
     .textContent =
-    announcements.length;
+    data.length;
 
 
   const list =
@@ -1299,9 +1033,7 @@ async function loadAnnouncements(){
       );
 
 
-  if(
-    announcements.length === 0
-  ){
+  if(data.length === 0){
 
     list.innerHTML =
       "<p>No announcements yet.</p>";
@@ -1314,43 +1046,30 @@ async function loadAnnouncements(){
   list.innerHTML = "";
 
 
-  announcements.forEach(
-    function(item){
+  data.forEach(
+    a=>{
 
-      const div =
-        document.createElement("div");
+      list.innerHTML += `
 
-
-      div.className =
-        "announcement";
-
-
-      const date =
-        item.created_at
-          ? new Date(
-              item.created_at
-            ).toLocaleString()
-          : "";
-
-
-      div.innerHTML = `
+      <div class="announcement">
 
         <h3>
-          ${escapeHTML(item.title)}
+          ${escapeHTML(a.title)}
         </h3>
 
         <p>
-          ${escapeHTML(item.body)}
+          ${escapeHTML(a.body)}
         </p>
 
         <small>
-          ${date}
+          ${new Date(
+            a.created_at
+          ).toLocaleString()}
         </small>
 
+      </div>
+
       `;
-
-
-      list.appendChild(div);
 
     }
   );
@@ -1358,55 +1077,36 @@ async function loadAnnouncements(){
 }
 
 
-/* ============================
+/* =================================
    CREATE ANNOUNCEMENT
-============================ */
-
-document
-  .getElementById(
-    "publishAnnouncementButton"
-  )
-  .addEventListener(
-    "click",
-    createAnnouncement
-  );
-
+================================= */
 
 async function createAnnouncement(){
 
   const title =
     document
-      .getElementById(
-        "announcementTitle"
-      )
+      .getElementById("title")
       .value
       .trim();
-
 
   const body =
     document
-      .getElementById(
-        "announcementBody"
-      )
+      .getElementById("body")
       .value
       .trim();
 
-
-  const message =
+  const msg =
     document
       .getElementById(
-        "announcementMessage"
+        "createMessage"
       );
-
-
-  message.innerHTML = "";
 
 
   if(!title || !body){
 
-    message.innerHTML =
+    msg.innerHTML =
       `<div class="message danger">
-        Title aur message dono bharna zaroori hai.
+        Title aur message dono bharo.
       </div>`;
 
     return;
@@ -1414,80 +1114,67 @@ async function createAnnouncement(){
   }
 
 
-  if(
-    !currentProfile ||
-    !["admin","cr"].includes(
-      currentProfile.role
-    )
-  ){
+  try{
 
-    message.innerHTML =
-      `<div class="message danger">
-        Sirf Admin/CR announcement create kar sakte hain.
+    await request(
+      "/rest/v1/announcements",
+      {
+        method:"POST",
+
+        headers:{
+          "Prefer":"return=minimal"
+        },
+
+        body:JSON.stringify({
+
+          author_id:
+            currentUser.id,
+
+          title:title,
+
+          body:body
+
+        })
+
+      }
+    );
+
+
+    msg.innerHTML =
+      `<div class="message success">
+        Announcement published.
       </div>`;
 
-    return;
+
+    document.getElementById(
+      "title"
+    ).value = "";
+
+
+    document.getElementById(
+      "body"
+    ).value = "";
+
+
+    await loadAnnouncements();
 
   }
 
+  catch(e){
 
-  const result =
-    await supabaseClient
-      .from("announcements")
-      .insert({
-
-        author_id:
-          currentUser.id,
-
-        title:title,
-
-        body:body
-
-      });
-
-
-  if(result.error){
-
-    message.innerHTML =
+    msg.innerHTML =
       `<div class="message danger">
-        ${escapeHTML(
-          result.error.message
-        )}
+        ${escapeHTML(e.message)}
       </div>`;
 
-    return;
-
   }
-
-
-  message.innerHTML =
-    `<div class="message success-box">
-      Announcement published successfully.
-    </div>`;
-
-
-  document
-    .getElementById(
-      "announcementTitle"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "announcementBody"
-    )
-    .value = "";
-
-
-  await loadAnnouncements();
 
 }
 
 
-/* ============================
+/* =================================
    ATTENDANCE
-============================ */
+================================= */
 
 function renderAttendance(){
 
@@ -1502,75 +1189,354 @@ function renderAttendance(){
 
 
   roster.forEach(
-    function(student){
+    s=>{
 
-      if(
-        !attendanceData[student.id]
-      ){
-
-        attendanceData[student.id] = "";
-
-      }
+      const status =
+        attendanceData[s.id] || "";
 
 
-      const row =
-        document.createElement("div");
+      list.innerHTML += `
 
+      <div class="attendance">
 
-      row.className =
-        "attendance-row";
+        <div>
 
-
-      row.innerHTML = `
-
-        <div class="student-info">
-
-          <div class="student-name">
+          <b>
             ${escapeHTML(
-              student.full_name
+              s.full_name
             )}
-          </div>
+          </b>
 
-          <div class="roll">
+          <br>
+
+          <small>
             ${escapeHTML(
-              student.roll_no
+              s.roll_no
             )}
-          </div>
+          </small>
 
         </div>
 
 
-        <div class="status-buttons">
+        <div class="att-buttons">
 
           <button
-            type="button"
-            class="status-btn present
-            ${
-              attendanceData[student.id]
-              === "present"
+            class="present ${
+              status==="present"
               ? "selected"
               : ""
             }"
             onclick="
-              setAttendance(
-                ${student.id},
+              mark(
+                ${s.id},
                 'present'
               )
-            "
-          >
+            ">
             Present
           </button>
 
 
           <button
-            type="button"
-            class="status-btn absent
-            ${
-              attendanceData[student.id]
-              === "absent"
+            class="absent ${
+              status==="absent"
               ? "selected"
               : ""
             }"
             onclick="
-              setAttendance(
-            
+              mark(
+                ${s.id},
+                'absent'
+              )
+            ">
+            Absent
+          </button>
+
+        </div>
+
+      </div>
+
+      `;
+
+    }
+  );
+
+}
+
+
+function mark(
+  id,
+  status
+){
+
+  attendanceData[id] =
+    status;
+
+  renderAttendance();
+
+}
+
+
+/* =================================
+   SAVE ATTENDANCE
+================================= */
+
+async function saveAttendance(){
+
+  const subjectId =
+    document
+      .getElementById("subject")
+      .value;
+
+  const date =
+    document
+      .getElementById("date")
+      .value;
+
+  const msg =
+    document
+      .getElementById(
+        "attendanceMessage"
+      );
+
+
+  msg.innerHTML = "";
+
+
+  if(!subjectId || !date){
+
+    msg.innerHTML =
+      `<div class="message danger">
+        Subject aur date select karo.
+      </div>`;
+
+    return;
+
+  }
+
+
+  const incomplete =
+    roster.filter(
+      s=>!attendanceData[s.id]
+    );
+
+
+  if(incomplete.length){
+
+    msg.innerHTML =
+      `<div class="message danger">
+        Sabhi ${roster.length}
+        students ka attendance mark karo.
+      </div>`;
+
+    return;
+
+  }
+
+
+  try{
+
+    /* Delete existing */
+
+    await request(
+      "/rest/v1/attendance" +
+      "?subject_id=eq." +
+      encodeURIComponent(subjectId) +
+      "&attendance_date=eq." +
+      encodeURIComponent(date),
+      {
+        method:"DELETE"
+      }
+    );
+
+
+    const rows =
+      roster.map(
+        s=>({
+
+          subject_id:
+            subjectId,
+
+          roster_student_id:
+            Number(s.id),
+
+          attendance_date:
+            date,
+
+          status:
+            attendanceData[s.id],
+
+          marked_by:
+            currentUser.id
+
+        })
+      );
+
+
+    await request(
+      "/rest/v1/attendance",
+      {
+        method:"POST",
+
+        headers:{
+          "Prefer":
+            "return=minimal"
+        },
+
+        body:JSON.stringify(rows)
+
+      }
+    );
+
+
+    msg.innerHTML =
+      `<div class="message success">
+        Attendance saved successfully.
+      </div>`;
+
+  }
+
+  catch(e){
+
+    msg.innerHTML =
+      `<div class="message danger">
+        ${escapeHTML(e.message)}
+      </div>`;
+
+  }
+
+}
+
+
+/* =================================
+   PAGE
+================================= */
+
+function page(
+  id,
+  button
+){
+
+  document
+    .querySelectorAll("main > section")
+    .forEach(
+      section=>{
+        section.classList.add(
+          "hidden"
+        );
+      }
+    );
+
+
+  document
+    .getElementById(id)
+    .classList
+    .remove("hidden");
+
+
+  document
+    .querySelectorAll(".nav button")
+    .forEach(
+      b=>{
+        b.classList.remove(
+          "active"
+        );
+      }
+    );
+
+
+  button.classList.add("active");
+
+
+  if(id === "attendance"){
+
+    renderAttendance();
+
+  }
+
+}
+
+
+/* =================================
+   LOGOUT
+================================= */
+
+function logout(){
+
+  accessToken = null;
+
+  currentUser = null;
+
+  profile = null;
+
+  localStorage.removeItem(
+    "bvsa_token"
+  );
+
+  localStorage.removeItem(
+    "bvsa_user"
+  );
+
+
+  document
+    .getElementById("app")
+    .classList
+    .add("hidden");
+
+
+  document
+    .getElementById("loginPage")
+    .classList
+    .remove("hidden");
+
+}
+
+
+/* =================================
+   ESCAPE
+================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =================================
+   DATE
+================================= */
+
+document
+  .getElementById("date")
+  .value =
+  new Date()
+    .toISOString()
+    .split("T")[0];
+
+
+/* =================================
+   RESTORE SESSION
+================================= */
+
+const savedToken =
+  localStorage.getItem(
+    "bvsa_token"
+  );
+
+const savedUser =
+  localStorage.getItem(
+    "bvsa_user"
+  );
+
+
+if(savedToken && savedUser){
+
+  accessToken =
+    savedToken;
+
+  currentUs
