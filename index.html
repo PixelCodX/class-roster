@@ -767,7 +767,35 @@ async function loadAttendanceDashboard(){
   }
   
 
-/* =========================
+function filterStudentAttendance(){
+
+  const search = document
+    .getElementById("studentAttendanceSearch")
+    .value
+    .toLowerCase()
+    .trim();
+
+  const container =
+    document.getElementById("studentAttendance");
+
+  const cards =
+    container.querySelectorAll(".card");
+
+  cards.forEach(card => {
+
+    const text =
+      card.textContent.toLowerCase();
+
+    if(text.includes(search)){
+      card.style.display = "";
+    }else{
+      card.style.display = "none";
+    }
+
+  });
+
+  }
+  /* =========================
    ROSTER
 ========================= */
 
