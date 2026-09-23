@@ -672,32 +672,9 @@ async function loadAttendanceDashboard(){
 
     document.getElementById("studentAttendance").innerHTML =
       "<p>Unable to load attendance.</p>";
+      }
   }
-
-  }
-  function filterStudentAttendance(){
-
-  const search = document
-    .getElementById("studentAttendanceSearch")
-    .value
-    .toLowerCase()
-    .trim();
-
-  const container =
-    document.getElementById("studentAttendance");
-
-  const cards = container.querySelectorAll(".card");
-
-  cards.forEach(card => {
-
-    const text = card.textContent.toLowerCase();
-
-    card.style.display =
-      text.includes(search) ? "" : "none";
-
-  });
-
-  }
+  
   function exportAttendanceCSV(){
 
   if(!roster.length){
