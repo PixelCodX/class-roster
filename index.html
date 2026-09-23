@@ -664,6 +664,96 @@ async function loadAttendanceDashboard(){
   }
 
   }
+  function exportAttendanceCSV(){
+
+  if(!roster.length){
+    alert("Roster data available nahi hai.");
+    return;
+  }
+
+  if(!subjects.length){
+    alert("Subject data available nahi hai.");
+    return;
+  }
+
+  const rows = [];
+
+  rows.push([
+    "Roll No",
+    "Student Name",
+    "Subject",
+    "Date",
+    "Status"
+  ]);
+
+  request(
+    "/rest/v1/attendance?select=subject_id,roster_student_id,attendance_date,status&order=attendance_date.asc"
+  )
+  .then(attendanceRows => {
+
+    attendanceRows.forEach(record => {
+
+      const student = roster.find(
+        s => Number(s.id) === Number(record.roster_student_id)
+      );
+
+      const subject = subjects.find(
+        s => s.id === record.subject_id
+      );
+
+      if(student){
+        rows.push([
+          student.roll_no,
+          student.full_name,
+          subject ? subject.name : "Unknown",
+          record.attendance_date,
+          record.status
+        ]);
+      }
+
+    });
+
+    if(rows.length === 1){
+      alert("Export karne ke liye attendance data nahi hai.");
+      return;
+    }
+
+    const csv = rows.map(row =>
+      row.map(value =>
+        `"${String(value ?? "").replace(/"/g,'""')}"`
+      ).join(",")
+    ).join("\n");
+
+    const blob = new Blob(
+      [csv],
+      {type:"text/csv;charset=utf-8;"}
+    );
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "BVSA_Attendance.csv";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+  })
+  .catch(error => {
+
+    console.error(error);
+
+    alert(
+      "Attendance export failed: " +
+      (error.message || "Unknown error")
+    );
+
+  });
+
+  }
 
 /* =========================
    ROSTER
