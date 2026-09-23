@@ -2,274 +2,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BVSA Class Roster</title>
-
 <style>
-*{
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
-
-body{
-  margin:0;
-  background:#f4f7fb;
-  color:#172033;
-}
-
-.hidden{
-  display:none!important;
-}
-
-button{
-  cursor:pointer;
-}
-
-input,select,textarea{
-  width:100%;
-  padding:13px;
-  margin:7px 0 15px;
-  border:1px solid #ccc;
-  border-radius:9px;
-  font-size:15px;
-}
-
-label{
-  font-weight:bold;
-  font-size:14px;
-}
-
-.primary{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:9px;
-  background:#2563eb;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-}
-
-.primary:disabled{
-  opacity:.6;
-}
-
-#loginPage{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-}
-
-.login-box{
-  width:100%;
-  max-width:400px;
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 15px 40px #0003;
-}
-
-.login-box h1{
-  text-align:center;
-  margin:0 0 8px;
-}
-
-.login-box p{
-  text-align:center;
-  color:#667085;
-  margin-bottom:25px;
-}
-
-#error{
-  color:#dc2626;
-  text-align:center;
-  margin-top:12px;
-  font-size:14px;
-}
-
-header{
-  background:linear-gradient(135deg,#2563eb,#4f46e5);
-  color:white;
-  padding:18px;
-}
-
-.header{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.logout{
-  padding:9px 14px;
-  border:0;
-  border-radius:8px;
-  background:white;
-  color:#2563eb;
-  font-weight:bold;
-}
-
-nav{
-  background:white;
-  border-bottom:1px solid #ddd;
-  overflow-x:auto;
-}
-
-.nav{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-}
-
-.nav button{
-  padding:15px;
-  border:0;
-  background:white;
-  color:#667085;
-  font-weight:bold;
-  white-space:nowrap;
-}
-
-.nav button.active{
-  color:#2563eb;
-  border-bottom:3px solid #2563eb;
-}
-
-main{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-
-.card{
-  background:white;
-  padding:20px;
-  border-radius:15px;
-  margin-bottom:18px;
-  box-shadow:0 3px 15px #0000000d;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:15px;
-}
-
-.stat{
-  background:#eff6ff;
-  padding:20px;
-  border-radius:12px;
-}
-
-.stat h2{
-  color:#2563eb;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-}
-
-th,td{
-  padding:12px;
-  border-bottom:1px solid #eee;
-  text-align:left;
-}
-
-.table{
-  overflow-x:auto;
-}
-
-.announcement{
-  padding:15px;
-  margin-bottom:12px;
-  background:#f8fafc;
-  border-left:4px solid #2563eb;
-  border-radius:7px;
-}
-
-.attendance{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 0;
-  border-bottom:1px solid #eee;
-}
-
-.att-buttons{
-  display:flex;
-  gap:6px;
-}
-
-.att-buttons button{
-  padding:8px 12px;
-  border:1px solid #ddd;
-  border-radius:7px;
-  background:white;
-  font-weight:bold;
-}
-
-.present.selected{
-  background:#16a34a;
-  color:white;
-}
-
-.absent.selected{
-  background:#dc2626;
-  color:white;
-}
-
-.save{
-  width:100%;
-  padding:14px;
-  border:0;
-  border-radius:9px;
-  background:#16a34a;
-  color:white;
-  font-weight:bold;
-  font-size:16px;
-  margin-top:20px;
-}
-
-.message{
-  padding:12px;
-  margin:10px 0;
-  border-radius:8px;
-  background:#eff6ff;
-}
-
-.success{
-  background:#dcfce7;
-  color:#15803d;
-}
-
-.danger{
-  background:#fee2e2;
-  color:#b91c1c;
-}
-
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#f4f7fb;color:#172033}
+.hidden{display:none!important}
+button{cursor:pointer}
+input,select,textarea{width:100%;padding:12px;margin:7px 0 15px;border:1px solid #ccc;border-radius:8px;font-size:15px}
+label{font-weight:bold;font-size:14px}
+.primary,.save{width:100%;padding:13px;border:0;border-radius:8px;color:#fff;font-size:16px;font-weight:bold}
+.primary{background:#2563eb}
+.save{background:#16a34a;margin-top:18px}
+.primary:disabled{opacity:.6}
+#loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#2563eb,#7c3aed)}
+.login-box{width:100%;max-width:400px;background:#fff;padding:30px;border-radius:18px;box-shadow:0 15px 40px #0003}
+.login-box h1{text-align:center;margin:0 0 8px}
+.login-box p{text-align:center;color:#667085;margin-bottom:25px}
+#error{color:#dc2626;text-align:center;margin-top:12px}
+header{background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;padding:18px}
+.header{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logout{padding:9px 14px;border:0;border-radius:8px;background:#fff;color:#2563eb;font-weight:bold}
+nav{background:#fff;border-bottom:1px solid #ddd;overflow-x:auto}
+.nav{max-width:1100px;margin:auto;display:flex}
+.nav button{padding:14px;border:0;background:#fff;color:#667085;font-weight:bold;white-space:nowrap}
+.nav button.active{color:#2563eb;border-bottom:3px solid #2563eb}
+main{max-width:1100px;margin:auto;padding:20px}
+.card{background:#fff;padding:20px;border-radius:14px;margin-bottom:18px;box-shadow:0 3px 15px #0000000d}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+.stat{background:#eff6ff;padding:18px;border-radius:12px}
+.stat h2{color:#2563eb}
+.table{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{padding:11px;border-bottom:1px solid #eee;text-align:left}
+.announcement{padding:14px;margin-bottom:12px;background:#f8fafc;border-left:4px solid #2563eb;border-radius:7px}
+.message{padding:11px;margin:10px 0;border-radius:8px;background:#eff6ff}
+.success{background:#dcfce7;color:#15803d}
+.danger{background:#fee2e2;color:#b91c1c}
+.attendance{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #eee}
+.att-buttons{display:flex;gap:6px}
+.att-buttons button{padding:8px 12px;border:1px solid #ddd;border-radius:7px;background:#fff;font-weight:bold}
+.present.selected{background:#16a34a;color:#fff}
+.absent.selected{background:#dc2626;color:#fff}
 @media(max-width:600px){
-  main{
-    padding:12px;
-  }
-
-  .attendance{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:10px;
-  }
-
-  .att-buttons{
-    width:100%;
-  }
-
-  .att-buttons button{
-    flex:1;
-  }
+main{padding:12px}
+.attendance{flex-direction:column;align-items:flex-start;gap:9px}
+.att-buttons{width:100%}
+.att-buttons button{flex:1}
 }
 </style>
 </head>
@@ -277,1267 +56,699 @@ th,td{
 <body>
 
 <!-- LOGIN -->
-
 <div id="loginPage">
+<div class="login-box">
+<h1>BVSA Class Roster</h1>
+<p>RKMVERI Ranchi • Semester 1</p>
 
-  <div class="login-box">
+<label>Email</label>
+<input id="email" type="email" placeholder="Enter your email">
 
-    <h1>BVSA Class Roster</h1>
+<label>Password</label>
+<input id="password" type="password" placeholder="Enter your password">
 
-    <p>RKMVERI Ranchi • Semester 1</p>
-
-    <label>Email</label>
-    <input id="email" type="email"
-           placeholder="Enter your email">
-
-    <label>Password</label>
-    <input id="password" type="password"
-           placeholder="Enter your password">
-
-    <button id="loginBtn"
-            class="primary"
-            type="button"
-      onclick="alert('BUTTON WORKING')">
-      Login
-    </button>
-
-    <div id="error"></div>
-
-  </div>
-
+<button id="loginBtn" class="primary" type="button">Login</button>
+<div id="error"></div>
+</div>
 </div>
 
-
 <!-- APP -->
-
 <div id="app" class="hidden">
 
 <header>
-
-  <div class="header">
-
-    <div>
-      <h2 style="margin:0">
-        BVSA Class Roster
-      </h2>
-
-      <small id="userInfo"></small>
-    </div>
-
-    <button
-      class="logout"
-      onclick="logout()">
-      Logout
-    </button>
-
-  </div>
-
+<div class="header">
+<div>
+<h2 style="margin:0">BVSA Class Roster</h2>
+<small id="userInfo"></small>
+</div>
+<button class="logout" onclick="logout()">Logout</button>
+</div>
 </header>
 
-
 <nav>
-
 <div class="nav">
-
-  <button
-    class="active"
-    onclick="page('dashboard',this)">
-    Dashboard
-  </button>
-
-  <button
-    onclick="page('roster',this)">
-    Class Roster
-  </button>
-
-  <button
-    onclick="page('announcements',this)">
-    Announcements
-  </button>
-
-  <button
-    id="createNav"
-    class="hidden"
-    onclick="page('create',this)">
-    Create Announcement
-  </button>
-
-  <button
-    id="attendanceNav"
-    class="hidden"
-    onclick="page('attendance',this)">
-    Attendance
-  </button>
-
-  <button
-    onclick="page('profile',this)">
-    Profile
-  </button>
-
+<button class="active" onclick="showPage('dashboard',this)">Dashboard</button>
+<button onclick="showPage('roster',this)">Class Roster</button>
+<button onclick="showPage('announcements',this)">Announcements</button>
+<button id="createNav" class="hidden" onclick="showPage('create',this)">Create Announcement</button>
+<button id="attendanceNav" class="hidden" onclick="showPage('attendance',this)">Attendance</button>
+<button onclick="showPage('profile',this)">Profile</button>
 </div>
-
 </nav>
-
 
 <main>
 
 <!-- DASHBOARD -->
-
 <section id="dashboard">
-
 <div class="card">
-
 <h2>Welcome 👋</h2>
-
-<p>
-BVSA Semester 1 Class Management System
-</p>
-
+<p>BVSA Semester 1 Class Management System</p>
 </div>
 
 <div class="grid">
-
 <div class="stat">
 <h2 id="studentCount">0</h2>
 <p>Total Students</p>
 </div>
-
 <div class="stat">
 <h2>6</h2>
 <p>Subjects</p>
 </div>
-
 <div class="stat">
 <h2 id="announcementCount">0</h2>
 <p>Announcements</p>
 </div>
-
 </div>
-
 </section>
-
 
 <!-- ROSTER -->
-
 <section id="roster" class="hidden">
-
 <div class="card">
-
 <h2>Class Roster</h2>
-
 <div class="table">
-
 <table>
-
 <thead>
-<tr>
-<th>#</th>
-<th>Name</th>
-<th>Roll No.</th>
-</tr>
+<tr><th>#</th><th>Name</th><th>Roll No.</th></tr>
 </thead>
-
 <tbody id="rosterBody"></tbody>
-
 </table>
-
 </div>
-
 </div>
-
 </section>
-
 
 <!-- ANNOUNCEMENTS -->
-
 <section id="announcements" class="hidden">
-
 <div class="card">
-
 <h2>Announcements</h2>
-
-<div id="announcementList">
-Loading...
+<div id="announcementList">Loading...</div>
 </div>
-
-</div>
-
 </section>
 
-
-<!-- CREATE -->
-
+<!-- CREATE ANNOUNCEMENT -->
 <section id="create" class="hidden">
-
 <div class="card">
-
 <h2>Create Announcement</h2>
 
 <label>Title</label>
-
-<input
-  id="title"
-  placeholder="Announcement title">
+<input id="title" placeholder="Announcement title">
 
 <label>Message</label>
+<textarea id="body" rows="5" placeholder="Write announcement"></textarea>
 
-<textarea
-  id="body"
-  rows="6"
-  placeholder="Write announcement">
-</textarea>
-
-<button
-  class="primary"
-  onclick="createAnnouncement()">
-  Publish Announcement
-</button>
-
+<button class="primary" onclick="createAnnouncement()">Publish Announcement</button>
 <div id="createMessage"></div>
-
 </div>
-
 </section>
 
-
 <!-- ATTENDANCE -->
-
 <section id="attendance" class="hidden">
-
 <div class="card">
-
 <h2>Mark Attendance</h2>
 
 <label>Subject</label>
-
 <select id="subject">
 <option value="">Select Subject</option>
 </select>
 
 <label>Date</label>
-
-<input
-  id="date"
-  type="date">
+<input id="date" type="date">
 
 <div id="attendanceMessage"></div>
-
 <div id="attendanceList"></div>
 
+<button class="save" onclick="saveAttendance()">Save Attendance</button>
+</div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile" class="hidden">
+<div class="card">
+<h2>My Profile</h2>
+<p><b>Name:</b> <span id="pName">-</span></p>
+<p><b>Username:</b> <span id="pUsername">-</span></p>
+<p><b>Roll No:</b> <span id="pRoll">-</span></p>
+<p><b>Role:</b> <span id="pRole">-</span></p>
+</div>
+</section>
+
+</main>
+</div>
+
+<script>
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL="https://cxhhewyegzhfocjmjfwp.supabase.co";
+const SUPABASE_KEY="sb_publishable_dBK7lW2zeXJ6PldPAU7jbA_Jpl3oOLN";
+
+let accessToken=null;
+let currentUser=null;
+let profile=null;
+let roster=[];
+let subjects=[];
+let attendanceData={};
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function escapeHTML(value){
+return String(value??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+
+async function request(path,options={}){
+const headers={
+"apikey":SUPABASE_KEY,
+"Content-Type":"application/json"
+};
+
+if(accessToken){
+headers.Authorization="Bearer "+accessToken;
+}
+
+if(options.headers){
+Object.assign(headers,options.headers);
+}
+
+const response=await fetch(
+SUPABASE_URL+path,
+{...options,headers}
+);
+
+const text=await response.text();
+
+let data=null;
+
+try{
+data=text?JSON.parse(text):null;
+}catch{
+data=text;
+}
+
+if(!response.ok){
+throw new Error(
+data?.message||
+data?.msg||
+data?.error_description||
+data?.details||
+text||
+"Request failed"
+);
+}
+
+return data;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document.getElementById("loginBtn").addEventListener("click",login);
+
+document.getElementById("password").addEventListener("keydown",e=>{
+if(e.key==="Enter") login();
+});
+
+async function login(){
+
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+const error=document.getElementById("error");
+const button=document.getElementById("loginBtn");
+
+error.textContent="";
+
+if(!email){
+error.textContent="Email enter karo.";
+return;
+}
+
+if(!password){
+error.textContent="Password enter karo.";
+return;
+}
+
+button.disabled=true;
+button.textContent="Logging in...";
+
+try{
+
+const data=await request(
+"/auth/v1/token?grant_type=password",
+{
+method:"POST",
+body:JSON.stringify({
+email:email,
+password:password
+})
+}
+);
+
+if(!data.access_token){
+throw new Error("Login token nahi mila.");
+}
+
+accessToken=data.access_token;
+currentUser=data.user;
+
+localStorage.setItem("bvsa_token",accessToken);
+localStorage.setItem("bvsa_user",JSON.stringify(currentUser));
+
+await loadApp();
+
+}catch(errorObject){
+
+console.error(errorObject);
+
+error.textContent=
+errorObject.message||"Login failed.";
+
+}finally{
+
+button.disabled=false;
+button.textContent="Login";
+
+}
+}
+
+
+/* =========================
+   LOAD APP
+========================= */
+
+async function loadApp(){
+
+try{
+
+if(!currentUser){
+throw new Error("User session nahi mila.");
+}
+
+const profiles=await request(
+"/rest/v1/profiles?id=eq."+
+encodeURIComponent(currentUser.id)+
+"&select=*"
+);
+
+if(!profiles||profiles.length===0){
+throw new Error("Profile nahi mila.");
+}
+
+profile=profiles[0];
+
+document.getElementById("loginPage").classList.add("hidden");
+document.getElementById("app").classList.remove("hidden");
+
+document.getElementById("userInfo").textContent=
+(profile.full_name||"")+" • "+(profile.role||"");
+
+document.getElementById("pName").textContent=profile.full_name||"-";
+document.getElementById("pUsername").textContent=profile.username||"-";
+document.getElementById("pRoll").textContent=profile.roll_no||"-";
+document.getElementById("pRole").textContent=profile.role||"-";
+
+if(profile.role==="admin"||profile.role==="cr"){
+document.getElementById("createNav").classList.remove("hidden");
+document.getElementById("attendanceNav").classList.remove("hidden");
+}
+
+await loadRoster();
+await loadSubjects();
+await loadAnnouncements();
+
+}catch(errorObject){
+
+console.error(errorObject);
+
+logout();
+
+document.getElementById("error").textContent=
+errorObject.message||"App load failed.";
+
+}
+}
+
+
+/* =========================
+   ROSTER
+========================= */
+
+async function loadRoster(){
+
+roster=await request(
+"/rest/v1/class_roster?select=*&order=roll_no.asc"
+);
+
+document.getElementById("studentCount").textContent=roster.length;
+
+const body=document.getElementById("rosterBody");
+body.innerHTML="";
+
+roster.forEach((student,index)=>{
+
+body.innerHTML+=`
+<tr>
+<td>${index+1}</td>
+<td>${escapeHTML(student.full_name)}</td>
+<td>${escapeHTML(student.roll_no)}</td>
+</tr>
+`;
+
+});
+
+}
+
+
+/* =========================
+   SUBJECTS
+========================= */
+
+async function loadSubjects(){
+
+subjects=await request(
+"/rest/v1/subjects?select=*&order=name.asc"
+);
+
+const select=document.getElementById("subject");
+
+select.innerHTML=
+'<option value="">Select Subject</option>';
+
+subjects.forEach(subject=>{
+
+select.innerHTML+=`
+<option value="${subject.id}">
+${escapeHTML(subject.name)}
+</option>
+`;
+
+});
+
+}
+
+
+/* =========================
+   ANNOUNCEMENTS
+========================= */
+
+async function loadAnnouncements(){
+
+const data=await request(
+"/rest/v1/announcements?select=*&order=created_at.desc"
+);
+
+document.getElementById("announcementCount").textContent=data.length;
+
+const list=document.getElementById("announcementList");
+
+if(!data.length){
+list.innerHTML="<p>No announcements yet.</p>";
+return;
+}
+
+list.innerHTML="";
+
+data.forEach(a=>{
+
+list.innerHTML+=`
+<div class="announcement">
+<h3>${escapeHTML(a.title)}</h3>
+<p>${escapeHTML(a.body)}</p>
+<small>${new Date(a.created_at).toLocaleString()}</small>
+</div>
+`;
+
+});
+
+}
+
+
+/* =========================
+   CREATE ANNOUNCEMENT
+========================= */
+
+async function createAnnouncement(){
+
+const title=document.getElementById("title").value.trim();
+const body=document.getElementById("body").value.trim();
+const message=document.getElementById("createMessage");
+
+message.innerHTML="";
+
+if(!title||!body){
+message.innerHTML=
+'<div class="message danger">Title aur message dono bharo.</div>';
+return;
+}
+
+try{
+
+await request(
+"/rest/v1/announcements",
+{
+method:"POST",
+headers:{"Prefer":"return=minimal"},
+body:JSON.stringify({
+author_id:currentUser.id,
+title:title,
+body:body
+})
+}
+);
+
+message.innerHTML=
+'<div class="message success">Announcement published successfully.</div>';
+
+document.getElementById("title").value="";
+document.getElementById("body").value="";
+
+await loadAnnouncements();
+
+}catch(errorObject){
+
+message.innerHTML=
+`<div class="message danger">${escapeHTML(errorObject.message)}</div>`;
+
+}
+
+}
+
+
+/* =========================
+   ATTENDANCE
+========================= */
+
+function renderAttendance(){
+
+const list=document.getElementById("attendanceList");
+list.innerHTML="";
+
+roster.forEach(student=>{
+
+const status=attendanceData[student.id]||"";
+
+list.innerHTML+=`
+<div class="attendance">
+
+<div>
+<b>${escapeHTML(student.full_name)}</b><br>
+<small>${escapeHTML(student.roll_no)}</small>
+</div>
+
+<div class="att-buttons">
+
 <button
-  class="save"
-  onclick="saveAttendance()">
-  Save Attendance
+class="present ${status==="present"?"selected":""}"
+onclick="markAttendance(${student.id},'present')">
+Present
+</button>
+
+<button
+class="absent ${status==="absent"?"selected":""}"
+onclick="markAttendance(${student.id},'absent')">
+Absent
 </button>
 
 </div>
 
-</section>
-
-
-<!-- PROFILE -->
-
-<section id="profile" class="hidden">
-
-<div class="card">
-
-<h2>My Profile</h2>
-
-<p>
-<b>Name:</b>
-<span id="pName"></span>
-</p>
-
-<p>
-<b>Username:</b>
-<span id="pUsername"></span>
-</p>
-
-<p>
-<b>Roll No:</b>
-<span id="pRoll"></span>
-</p>
-
-<p>
-<b>Role:</b>
-<span id="pRole"></span>
-</p>
-
 </div>
+`;
 
-</section>
-
-</main>
-
-</div>
-
-
-<script>
-
-/* =================================
-   SUPABASE
-================================= */
-
-const URL =
-"https://cxhhewyegzhfocjmjfwp.supabase.co";
-
-const KEY =
-"sb_publishable_dBK7lW2zeXJ6PldPAU7jbA_Jpl3oOLN";
-
-let accessToken = null;
-let currentUser = null;
-let profile = null;
-
-let roster = [];
-let subjects = [];
-let attendanceData = {};
-
-
-/* =================================
-   SUPABASE REQUEST
-================================= */
-
-async function request(
-  path,
-  options={}
-){
-
-  options.headers = {
-
-    "apikey":KEY,
-
-    "Content-Type":
-      "application/json",
-
-    ...(
-      options.headers || {}
-    )
-
-  };
-
-
-  if(accessToken){
-
-    options.headers[
-      "Authorization"
-    ] =
-      "Bearer " +
-      accessToken;
-
-  }
-
-
-  const response =
-    await fetch(
-      URL + path,
-      options
-    );
-
-
-  const text =
-    await response.text();
-
-
-  let data = null;
-
-  try{
-    data = text ? JSON.parse(text) : null;
-  }
-  catch{
-    data = text;
-  }
-
-
-  if(!response.ok){
-
-    throw new Error(
-      data?.message ||
-      data?.msg ||
-      data?.error_description ||
-      text ||
-      "Request failed"
-    );
-
-  }
-
-
-  return data;
+});
 
 }
 
-
-/* =================================
-   LOGIN
-================================= */
-
-document
-  .getElementById("loginBtn")
-  .addEventListener(
-    "click",
-    login
-  );
-
-
-document
-  .getElementById("password")
-  .addEventListener(
-    "keydown",
-    function(e){
-
-      if(e.key === "Enter"){
-        login();
-      }
-
-    }
-  );
-
-
-async function login(){
-
-  const email =
-    document
-      .getElementById("email")
-      .value
-      .trim();
-
-  const password =
-    document
-      .getElementById("password")
-      .value;
-
-
-  const error =
-    document
-      .getElementById("error");
-
-
-  error.textContent = "";
-
-
-  if(!email || !password){
-
-    error.textContent =
-      "Email aur password enter karo.";
-
-    return;
-
-  }
-
-
-  const btn =
-    document
-      .getElementById("loginBtn");
-
-
-  btn.disabled = true;
-
-  btn.textContent =
-    "Logging in...";
-
-
-  try{
-
-    const data =
-      await request(
-        "/auth/v1/token?grant_type=password",
-        {
-          method:"POST",
-
-          body:JSON.stringify({
-            email:email,
-            password:password
-          })
-        }
-      );
-
-
-    accessToken =
-      data.access_token;
-
-
-    currentUser =
-      data.user;
-
-
-    localStorage.setItem(
-      "bvsa_token",
-      accessToken
-    );
-
-    localStorage.setItem(
-      "bvsa_user",
-      JSON.stringify(currentUser)
-    );
-
-
-    await loadApp();
-
-  }
-
-  catch(e){
-
-    console.error(e);
-
-    error.textContent =
-      e.message ||
-      "Login failed.";
-
-  }
-
-  finally{
-
-    btn.disabled = false;
-
-    btn.textContent = "Login";
-
-  }
-
+function markAttendance(id,status){
+attendanceData[id]=status;
+renderAttendance();
 }
 
 
-/* =================================
-   LOAD APP
-================================= */
-
-async function loadApp(){
-
-  try{
-
-    const profiles =
-      await request(
-        "/rest/v1/profiles?id=eq." +
-        encodeURIComponent(
-          currentUser.id
-        ) +
-        "&select=*"
-      );
-
-
-    if(
-      !profiles ||
-      profiles.length === 0
-    ){
-
-      throw new Error(
-        "Profile nahi mila."
-      );
-
-    }
-
-
-    profile =
-      profiles[0];
-
-
-    document
-      .getElementById("loginPage")
-      .classList
-      .add("hidden");
-
-
-    document
-      .getElementById("app")
-      .classList
-      .remove("hidden");
-
-
-    document
-      .getElementById("userInfo")
-      .textContent =
-      profile.full_name +
-      " • " +
-      profile.role;
-
-
-    document
-      .getElementById("pName")
-      .textContent =
-      profile.full_name || "-";
-
-
-    document
-      .getElementById("pUsername")
-      .textContent =
-      profile.username || "-";
-
-
-    document
-      .getElementById("pRoll")
-      .textContent =
-      profile.roll_no || "-";
-
-
-    document
-      .getElementById("pRole")
-      .textContent =
-      profile.role || "-";
-
-
-    if(
-      profile.role === "admin" ||
-      profile.role === "cr"
-    ){
-
-      document
-        .getElementById("createNav")
-        .classList
-        .remove("hidden");
-
-
-      document
-        .getElementById("attendanceNav")
-        .classList
-        .remove("hidden");
-
-    }
-
-
-    await loadRoster();
-
-    await loadSubjects();
-
-    await loadAnnouncements();
-
-  }
-
-  catch(e){
-
-    console.error(e);
-
-    document
-      .getElementById("error")
-      .textContent =
-      e.message;
-
-    logout();
-
-  }
-
-}
-
-
-/* =================================
-   ROSTER
-================================= */
-
-async function loadRoster(){
-
-  roster =
-    await request(
-      "/rest/v1/class_roster?select=*&order=roll_no.asc"
-    );
-
-
-  document
-    .getElementById("studentCount")
-    .textContent =
-    roster.length;
-
-
-  const body =
-    document
-      .getElementById("rosterBody");
-
-
-  body.innerHTML = "";
-
-
-  roster.forEach(
-    (student,i)=>{
-
-      body.innerHTML += `
-
-      <tr>
-
-        <td>${i+1}</td>
-
-        <td>
-          ${escapeHTML(student.full_name)}
-        </td>
-
-        <td>
-          ${escapeHTML(student.roll_no)}
-        </td>
-
-      </tr>
-
-      `;
-
-    }
-  );
-
-}
-
-
-/* =================================
-   SUBJECTS
-================================= */
-
-async function loadSubjects(){
-
-  subjects =
-    await request(
-      "/rest/v1/subjects?select=*&order=name.asc"
-    );
-
-
-  const select =
-    document
-      .getElementById("subject");
-
-
-  select.innerHTML =
-    `<option value="">
-      Select Subject
-    </option>`;
-
-
-  subjects.forEach(
-    s=>{
-
-      select.innerHTML += `
-
-      <option value="${s.id}">
-        ${escapeHTML(s.name)}
-      </option>
-
-      `;
-
-    }
-  );
-
-}
-
-
-/* =================================
-   ANNOUNCEMENTS
-================================= */
-
-async function loadAnnouncements(){
-
-  const data =
-    await request(
-      "/rest/v1/announcements?select=*&order=created_at.desc"
-    );
-
-
-  document
-    .getElementById("announcementCount")
-    .textContent =
-    data.length;
-
-
-  const list =
-    document
-      .getElementById(
-        "announcementList"
-      );
-
-
-  if(data.length === 0){
-
-    list.innerHTML =
-      "<p>No announcements yet.</p>";
-
-    return;
-
-  }
-
-
-  list.innerHTML = "";
-
-
-  data.forEach(
-    a=>{
-
-      list.innerHTML += `
-
-      <div class="announcement">
-
-        <h3>
-          ${escapeHTML(a.title)}
-        </h3>
-
-        <p>
-          ${escapeHTML(a.body)}
-        </p>
-
-        <small>
-          ${new Date(
-            a.created_at
-          ).toLocaleString()}
-        </small>
-
-      </div>
-
-      `;
-
-    }
-  );
-
-}
-
-
-/* =================================
-   CREATE ANNOUNCEMENT
-================================= */
-
-async function createAnnouncement(){
-
-  const title =
-    document
-      .getElementById("title")
-      .value
-      .trim();
-
-  const body =
-    document
-      .getElementById("body")
-      .value
-      .trim();
-
-  const msg =
-    document
-      .getElementById(
-        "createMessage"
-      );
-
-
-  if(!title || !body){
-
-    msg.innerHTML =
-      `<div class="message danger">
-        Title aur message dono bharo.
-      </div>`;
-
-    return;
-
-  }
-
-
-  try{
-
-    await request(
-      "/rest/v1/announcements",
-      {
-        method:"POST",
-
-        headers:{
-          "Prefer":"return=minimal"
-        },
-
-        body:JSON.stringify({
-
-          author_id:
-            currentUser.id,
-
-          title:title,
-
-          body:body
-
-        })
-
-      }
-    );
-
-
-    msg.innerHTML =
-      `<div class="message success">
-        Announcement published.
-      </div>`;
-
-
-    document.getElementById(
-      "title"
-    ).value = "";
-
-
-    document.getElementById(
-      "body"
-    ).value = "";
-
-
-    await loadAnnouncements();
-
-  }
-
-  catch(e){
-
-    msg.innerHTML =
-      `<div class="message danger">
-        ${escapeHTML(e.message)}
-      </div>`;
-
-  }
-
-}
-
-
-/* =================================
-   ATTENDANCE
-================================= */
-
-function renderAttendance(){
-
-  const list =
-    document
-      .getElementById(
-        "attendanceList"
-      );
-
-
-  list.innerHTML = "";
-
-
-  roster.forEach(
-    s=>{
-
-      const status =
-        attendanceData[s.id] || "";
-
-
-      list.innerHTML += `
-
-      <div class="attendance">
-
-        <div>
-
-          <b>
-            ${escapeHTML(
-              s.full_name
-            )}
-          </b>
-
-          <br>
-
-          <small>
-            ${escapeHTML(
-              s.roll_no
-            )}
-          </small>
-
-        </div>
-
-
-        <div class="att-buttons">
-
-          <button
-            class="present ${
-              status==="present"
-              ? "selected"
-              : ""
-            }"
-            onclick="
-              mark(
-                ${s.id},
-                'present'
-              )
-            ">
-            Present
-          </button>
-
-
-          <button
-            class="absent ${
-              status==="absent"
-              ? "selected"
-              : ""
-            }"
-            onclick="
-              mark(
-                ${s.id},
-                'absent'
-              )
-            ">
-            Absent
-          </button>
-
-        </div>
-
-      </div>
-
-      `;
-
-    }
-  );
-
-}
-
-
-function mark(
-  id,
-  status
-){
-
-  attendanceData[id] =
-    status;
-
-  renderAttendance();
-
-}
-
-
-/* =================================
+/* =========================
    SAVE ATTENDANCE
-================================= */
+========================= */
 
 async function saveAttendance(){
 
-  const subjectId =
-    document
-      .getElementById("subject")
-      .value;
+const subjectId=document.getElementById("subject").value;
+const date=document.getElementById("date").value;
+const message=document.getElementById("attendanceMessage");
 
-  const date =
-    document
-      .getElementById("date")
-      .value;
+message.innerHTML="";
 
-  const msg =
-    document
-      .getElementById(
-        "attendanceMessage"
-      );
+if(!subjectId){
+message.innerHTML=
+'<div class="message danger">Subject select karo.</div>';
+return;
+}
 
+if(!date){
+message.innerHTML=
+'<div class="message danger">Date select karo.</div>';
+return;
+}
 
-  msg.innerHTML = "";
+const incomplete=roster.filter(
+student=>!attendanceData[student.id]
+);
 
+if(incomplete.length){
+message.innerHTML=
+`<div class="message danger">Sabhi ${roster.length} students ka attendance mark karo.</div>`;
+return;
+}
 
-  if(!subjectId || !date){
+try{
 
-    msg.innerHTML =
-      `<div class="message danger">
-        Subject aur date select karo.
-      </div>`;
+await request(
+"/rest/v1/attendance"+
+"?subject_id=eq."+encodeURIComponent(subjectId)+
+"&attendance_date=eq."+encodeURIComponent(date),
+{method:"DELETE"}
+);
 
-    return;
+const rows=roster.map(student=>({
+subject_id:subjectId,
+roster_student_id:Number(student.id),
+attendance_date:date,
+status:attendanceData[student.id],
+marked_by:currentUser.id
+}));
 
-  }
+await request(
+"/rest/v1/attendance",
+{
+method:"POST",
+headers:{"Prefer":"return=minimal"},
+body:JSON.stringify(rows)
+}
+);
 
+message.innerHTML=
+'<div class="message success">Attendance saved successfully.</div>';
 
-  const incomplete =
-    roster.filter(
-      s=>!attendanceData[s.id]
-    );
+}catch(errorObject){
 
+message.innerHTML=
+`<div class="message danger">${escapeHTML(errorObject.message)}</div>`;
 
-  if(incomplete.length){
-
-    msg.innerHTML =
-      `<div class="message danger">
-        Sabhi ${roster.length}
-        students ka attendance mark karo.
-      </div>`;
-
-    return;
-
-  }
-
-
-  try{
-
-    /* Delete existing */
-
-    await request(
-      "/rest/v1/attendance" +
-      "?subject_id=eq." +
-      encodeURIComponent(subjectId) +
-      "&attendance_date=eq." +
-      encodeURIComponent(date),
-      {
-        method:"DELETE"
-      }
-    );
-
-
-    const rows =
-      roster.map(
-        s=>({
-
-          subject_id:
-            subjectId,
-
-          roster_student_id:
-            Number(s.id),
-
-          attendance_date:
-            date,
-
-          status:
-            attendanceData[s.id],
-
-          marked_by:
-            currentUser.id
-
-        })
-      );
-
-
-    await request(
-      "/rest/v1/attendance",
-      {
-        method:"POST",
-
-        headers:{
-          "Prefer":
-            "return=minimal"
-        },
-
-        body:JSON.stringify(rows)
-
-      }
-    );
-
-
-    msg.innerHTML =
-      `<div class="message success">
-        Attendance saved successfully.
-      </div>`;
-
-  }
-
-  catch(e){
-
-    msg.innerHTML =
-      `<div class="message danger">
-        ${escapeHTML(e.message)}
-      </div>`;
-
-  }
+}
 
 }
 
 
-/* =================================
-   PAGE
-================================= */
+/* =========================
+   NAVIGATION
+========================= */
 
-function page(
-  id,
-  button
-){
+function showPage(id,button){
 
-  document
-    .querySelectorAll("main > section")
-    .forEach(
-      section=>{
-        section.classList.add(
-          "hidden"
-        );
-      }
-    );
+document.querySelectorAll("main>section").forEach(section=>{
+section.classList.add("hidden");
+});
 
+document.getElementById(id).classList.remove("hidden");
 
-  document
-    .getElementById(id)
-    .classList
-    .remove("hidden");
+document.querySelectorAll(".nav button").forEach(b=>{
+b.classList.remove("active");
+});
 
+button.classList.add("active");
 
-  document
-    .querySelectorAll(".nav button")
-    .forEach(
-      b=>{
-        b.classList.remove(
-          "active"
-        );
-      }
-    );
-
-
-  button.classList.add("active");
-
-
-  if(id === "attendance"){
-
-    renderAttendance();
-
-  }
+if(id==="attendance"){
+renderAttendance();
+}
 
 }
 
 
-/* =================================
+/* =========================
    LOGOUT
-================================= */
+========================= */
 
 function logout(){
 
-  accessToken = null;
+accessToken=null;
+currentUser=null;
+profile=null;
+roster=[];
+subjects=[];
+attendanceData={};
 
-  currentUser = null;
+localStorage.removeItem("bvsa_token");
+localStorage.removeItem("bvsa_user");
 
-  profile = null;
+document.getElementById("app").classList.add("hidden");
+document.getElementById("loginPage").classList.remove("hidden");
 
-  localStorage.removeItem(
-    "bvsa_token"
-  );
-
-  localStorage.removeItem(
-    "bvsa_user"
-  );
-
-
-  document
-    .getElementById("app")
-    .classList
-    .add("hidden");
-
-
-  document
-    .getElementById("loginPage")
-    .classList
-    .remove("hidden");
+document.getElementById("email").value="";
+document.getElementById("password").value="";
+document.getElementById("error").textContent="";
 
 }
 
 
-/* =================================
-   ESCAPE
-================================= */
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* =================================
+/* =========================
    DATE
-================================= */
+========================= */
 
-document
-  .getElementById("date")
-  .value =
-  new Date()
-    .toISOString()
-    .split("T")[0];
+document.getElementById("date").value=
+new Date().toISOString().split("T")[0];
 
 
-/* =================================
+/* =========================
    RESTORE SESSION
-================================= */
+========================= */
 
-const savedToken =
-  localStorage.getItem(
-    "bvsa_token"
-  );
+const savedToken=localStorage.getItem("bvsa_token");
+const savedUser=localStorage.getItem("bvsa_user");
 
-const savedUser =
-  localStorage.getItem(
-    "bvsa_user"
-  );
+if(savedToken&&savedUser){
 
+try{
 
-if(savedToken && savedUser){
+accessToken=savedToken;
+currentUser=JSON.parse(savedUser);
 
-  accessToken =
-    savedToken;
+loadApp();
 
-  currentUs
+}catch(errorObject){
+
+console.error(errorObject);
+logout();
+
+}
+
+}
+
+</script>
+</body>
+  </html>
