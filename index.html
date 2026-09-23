@@ -441,43 +441,64 @@ async function loadAttendanceDashboard(){
 
   try{
 
-    const today = new Date().toISOString().split("T")[0];
-
     const rows = await request(
-      "/rest/v1/attendance?attendance_date=eq."+
-      today+
-      "&select=subject_id,roster_student_id,status,attendance_date"
+      "/rest/v1/attendance?select=subject_id,roster_student_id,status,attendance_date"
     );
 
-    const total = roster.length;
+    const subjectBox = document.getElementById("subjectAttendance");
 
-    const presentStudents = new Set(
-  rows
-    .filter(r => r.status === "present")
-    .map(r => r.roster_student_id)
-);
+    if(!rows || rows.length === 0){
+      subjectBox.innerHTML = "<p>No attendance records yet.</p>";
+      return;
+    }
 
-const absentStudents = new Set(
-  rows
-    .filter(r => r.status === "absent")
-    .map(r => r.roster_student_id)
-);
+    let html = "";
 
-const present = presentStudents.size;
-const absent = absentStudents.size;
+    subjects.forEach(subject => {
 
-    const percentage = total
-      ? ((present / total) * 100).toFixed(1)
-      : "0.0";
+      const subjectRows = rows.filter(
+        r => r.subject_id === subject.id
+      );
 
-    document.getElementById("dashPresent").textContent = present;
-    document.getElementById("dashAbsent").textContent = absent;
-    document.getElementById("dashPercentage").textContent =
-      percentage + "%";
+      const total = subjectRows.length;
+
+      if(total === 0){
+        html += `
+          <div class="card">
+            <b>${escapeHTML(subject.name)}</b>
+            <p>No attendance marked yet.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const present = subjectRows.filter(
+        r => r.status === "present"
+      ).length;
+
+      const percentage = ((present / total) * 100).toFixed(1);
+
+      html += `
+        <div class="card">
+          <b>${escapeHTML(subject.name)}</b>
+          <p>
+            Present: ${present} / ${total}
+            &nbsp; • &nbsp;
+            Attendance: ${percentage}%
+          </p>
+        </div>
+      `;
+
+    });
+
+    subjectBox.innerHTML = html;
 
   }catch(error){
 
-    console.error("Dashboard error:",error);
+    console.error("Subject attendance error:",error);
+
+    document.getElementById("subjectAttendance").innerHTML =
+      "<p>Unable to load subject attendance.</p>";
 
   }
   }
