@@ -560,6 +560,62 @@ historyBox.innerHTML =
 
     document.getElementById("subjectAttendance").innerHTML =
       "<p>Unable to load subject attendance.</p>";
+    const studentBox = document.getElementById("studentAttendance");
+
+const studentMap = {};
+
+rows.forEach(row => {
+
+  const id = row.roster_student_id;
+
+  if(!studentMap[id]){
+    studentMap[id] = {
+      present: 0,
+      absent: 0
+    };
+  }
+
+  if(row.status === "present"){
+    studentMap[id].present++;
+  }else if(row.status === "absent"){
+    studentMap[id].absent++;
+  }
+
+});
+
+let studentHTML = "";
+
+roster.forEach(student => {
+
+  const data = studentMap[student.id] || {
+    present: 0,
+    absent: 0
+  };
+
+  const total = data.present + data.absent;
+
+  const percentage = total
+    ? ((data.present / total) * 100).toFixed(1)
+    : "0.0";
+
+  studentHTML += `
+    <div class="card">
+      <b>${escapeHTML(student.full_name)}</b>
+      <p>
+        ${escapeHTML(student.roll_no)}
+        &nbsp; • &nbsp;
+        Present: ${data.present}
+        &nbsp; • &nbsp;
+        Absent: ${data.absent}
+        &nbsp; • &nbsp;
+        Attendance: ${percentage}%
+      </p>
+    </div>
+  `;
+
+});
+
+studentBox.innerHTML = studentHTML;
 
   }
   }
