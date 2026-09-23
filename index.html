@@ -674,6 +674,35 @@ async function loadAttendanceDashboard(){
       "<p>Unable to load attendance.</p>";
 
   }
+  function filterStudentAttendance(){
+
+  const search = document
+    .getElementById("studentAttendanceSearch")
+    .value
+    .toLowerCase()
+    .trim();
+
+  const container =
+    document.getElementById("studentAttendance");
+
+  const cards = container.querySelectorAll(".card");
+
+  let visible = 0;
+
+  cards.forEach(card => {
+
+    const text = card.textContent.toLowerCase();
+
+    if(text.includes(search)){
+      card.style.display = "";
+      visible++;
+    }else{
+      card.style.display = "none";
+    }
+
+  });
+
+  }
 
   }
   function exportAttendanceCSV(){
