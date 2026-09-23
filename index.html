@@ -492,7 +492,62 @@ async function loadAttendanceDashboard(){
     });
 
     subjectBox.innerHTML = html;
+const historyBox = document.getElementById("attendanceHistory");
 
+const historyMap = {};
+
+rows.forEach(row => {
+
+  const key = row.attendance_date + "_" + row.subject_id;
+
+  if(!historyMap[key]){
+    historyMap[key] = {
+      date: row.attendance_date,
+      subject_id: row.subject_id,
+      present: 0,
+      total: 0
+    };
+  }
+
+  historyMap[key].total++;
+
+  if(row.status === "present"){
+    historyMap[key].present++;
+  }
+
+});
+
+let historyHTML = "";
+
+Object.values(historyMap)
+  .sort((a,b) => b.date.localeCompare(a.date))
+  .slice(0,10)
+  .forEach(item => {
+
+    const subject = subjects.find(
+      s => s.id === item.subject_id
+    );
+
+    const percentage =
+      ((item.present / item.total) * 100).toFixed(1);
+
+    historyHTML += `
+      <div class="card">
+        <b>${escapeHTML(subject ? subject.name : "Unknown Subject")}</b>
+        <p>
+          📅 ${item.date}
+          &nbsp; • &nbsp;
+          Present: ${item.present}/${item.total}
+          &nbsp; • &nbsp;
+          ${percentage}%
+        </p>
+      </div>
+    `;
+
+  });
+
+historyBox.innerHTML =
+  historyHTML || "<p>No attendance records yet.</p>";
   }catch(error){
 
     console.error("Subject attendance error:",error);
