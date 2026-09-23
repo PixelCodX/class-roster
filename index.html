@@ -484,6 +484,7 @@ if(profile.role==="admin" || profile.role==="cr"){
 
 await loadRoster();
 await loadSubjects();
+await loadTimetable();
 await loadAnnouncements();
 await loadAttendanceDashboard();
 
@@ -1083,8 +1084,93 @@ if(subjectsPageList){
 
   }
 }
+async function loadTimetable(){
 
+  const container = document.getElementById("timetableList");
 
+  if(!container) return;
+
+  try{
+
+    const rows = await request(
+      "/rest/v1/timetable?select=id,day,start_time,end_time,subject,type&order=id.asc"
+    );
+
+    if(!rows || rows.length === 0){
+      container.innerHTML =
+        "<div class='card'><p>No timetable added yet.</p></div>";
+      return;
+    }
+
+    const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+    let html = "";
+
+    days.forEach(day => {
+
+      const dayRows = rows.filter(row => row.day === day);
+
+      if(dayRows.length === 0) return;
+
+      html += `
+        <div class="card">
+          <h3>📅 ${day}</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Subject</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+      `;
+
+      dayRows.forEach(row => {
+
+        html += `
+          <tr>
+            <td>
+              ${escapeHTML(row.start_time)}
+              -
+              ${escapeHTML(row.end_time)}
+            </td>
+
+            <td>
+              ${escapeHTML(row.subject)}
+            </td>
+
+            <td>
+              ${escapeHTML(row.type || "-")}
+            </td>
+          </tr>
+        `;
+
+      });
+
+      html += `
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+    });
+
+    container.innerHTML =
+      html || "<div class='card'><p>No timetable added yet.</p></div>";
+
+  }catch(error){
+
+    console.error("Timetable error:", error);
+
+    container.innerHTML =
+      "<div class='card'><p>Unable to load timetable.</p></div>";
+
+  }
+
+  }
 /* =========================
    ANNOUNCEMENTS
 ========================= */
